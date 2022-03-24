@@ -3,10 +3,112 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RugbyManagementSystem"
+        xmlns:local="clr-namespace:RugbyManagementSystem" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Rugby Teams Management" Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    </Grid>
+    <Border
+        Background="#272537"
+        CornerRadius="20">
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Rugby Team Management"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="White"
+                   FontSize="26"
+                   FontFamily="Fonts/#Dosis"
+                   FontWeight="Medium"/>
+
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="200"
+                         Height="40"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Left"
+                         Margin="5"
+                         Style="{StaticResource ModernLoginTextBox}"/>
+                        <iconPacks:PackIconMaterial Kind="Account" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center" 
+                                                Foreground="White"/>
+                </StackPanel>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border CornerRadius="10"
+                            Background="#353340"
+                            Width="200" Height="40"
+                            Margin="5">
+                        <Grid Grid.Column="0">
+                            <Rectangle StrokeThickness="1"/>
+                            <PasswordBox 
+                                     Name="PasswordBox"
+                                     Width="200"
+                                     Height="40"
+                                     Margin="1"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                     Padding="5"
+                                     Foreground="#CFCFCF"
+                                     PasswordChanged="OnPasswordChange"
+                                     />
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Password"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       FontSize="11"
+                                       Foreground="DarkGray"
+                                       Grid.Column="0"
+                                       Name="PasswordHint"
+                                       >
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    
+                    <iconPacks:PackIconMaterial Grid.Column="2"
+                                                Kind="Lock" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center" 
+                                                Foreground="White"/>
+                </Grid>
+                
+                
+                
+                <Button Content="Log In"
+                        Foreground="White"
+                        FontSize="12"
+                        Style="{StaticResource ModernLoginButton}"
+                        Click="OnLogInClick"/>
+
+
+            </StackPanel>
+        </Grid>
+
+        
+        
+        
+    </Border>
+    
+    
+    
 </Window>

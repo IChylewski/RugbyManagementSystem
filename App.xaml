@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:RugbyManagementSystem"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/LoginTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/PasswordTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/LoginButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

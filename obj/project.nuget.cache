@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "PdmI0pP3mvehSRuW8IEmOhtDwwldvp7sPPV3lRqsI7/qH8OXZnj0gKwawf6Pe9ClKPqboS9G+4bcsh+84gaoYw==",
+  "dgSpecHash": "6skI/ZppkbrRDXcZh5pAn8/UFE4WcaLAJnT8s1BYO9xK9mdrTasbo8Imrg4G/ygTnICvTryHhLXWTcAUEuqgPw==",
   "success": true,
   "projectFilePath": "C:\\Users\\semir\\Desktop\\Szkoła\\HND\\Graded Unit\\Development Phase\\RugbyManagementSystem\\RugbyManagementSystem.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\semir\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -19,10 +19,29 @@ namespace RugbyManagementSystem
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {   
+
+
         public MainWindow()
-        {
+        {   
             InitializeComponent();
+        }
+
+        private void OnPasswordChange(Object sender, RoutedEventArgs args)
+        {
+            if(PasswordBox.Password == "")
+            {
+                PasswordHint.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PasswordHint.Visibility = Visibility.Hidden;
+            }
+            
+        }
+        private void OnLogInClick(Object sender, RoutedEventArgs args)
+        {
+            MessageBox.Show(PasswordBox.Password.ToString());
         }
     }
 }
