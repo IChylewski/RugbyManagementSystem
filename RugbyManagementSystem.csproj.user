@@ -19,5 +19,8 @@
     <Page Update="Themes\LoginTextBoxTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\RestoreButtonTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

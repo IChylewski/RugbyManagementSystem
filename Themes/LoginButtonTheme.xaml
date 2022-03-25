@@ -16,7 +16,7 @@
                             CornerRadius="12"
                             Background="{TemplateBinding Background}"
                             Margin="5"
-                            >
+                            VerticalAlignment="Center">
 
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
                     </Border>

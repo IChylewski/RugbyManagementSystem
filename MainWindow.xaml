@@ -7,34 +7,73 @@
         mc:Ignorable="d"
         Title="Rugby Teams Management" Height="600" Width="920"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         AllowsTransparency="True">
 
     <Border
         Background="#272537"
-        CornerRadius="20">
+        CornerRadius="20"
+        MouseDown="Border_MouseDown"
+        Padding="1"
+        Margin="2">
 
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="25"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Rugby Team Management"
+            <Rectangle Fill="#1d1b29"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <iconPacks:PackIconMaterial Kind="WindowMinimize" 
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center" 
+                                            Foreground="White"
+                                            Margin="2,5,2,5"
+                                            MouseDown="ButtonMinimize_Click"
+                                            Background="Transparent"/>
+                <iconPacks:PackIconMaterial Kind="WindowMaximize" 
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center" 
+                                            Foreground="White"
+                                            Margin="5"
+                                            Background="Transparent"
+                                            MouseDown="ButtonMaximize_Click"/>
+                <iconPacks:PackIconMaterial Kind="WindowClose" 
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center" 
+                                            Foreground="White"
+                                            Margin="5"
+                                            Background="Transparent"
+                                            MouseDown="ButtonExit_Click"/>
+            </StackPanel>
+            
+
+            <StackPanel Grid.Row="2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/RugbyBall.png"
+                           Height="40"/>
+                    <TextBlock Text="Rugby Team Management"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="White"
                    FontSize="26"
                    FontFamily="Fonts/#Dosis"
-                   FontWeight="Medium"/>
-
-            <StackPanel Grid.Row="1"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center">
-
-                <StackPanel Orientation="Horizontal">
+                   FontWeight="Medium"
+                   Grid.Row="1"
+                   Margin="10,15,10,15"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
                     <TextBox Width="200"
                          Height="40"
                          VerticalContentAlignment="Center"
@@ -47,7 +86,8 @@
                                                 Foreground="White"/>
                 </StackPanel>
 
-                <Grid>
+                <Grid VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>

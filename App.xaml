@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Themes/LoginTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/PasswordTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/LoginButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/RestoreButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

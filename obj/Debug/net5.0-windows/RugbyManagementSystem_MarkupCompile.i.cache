@@ -1,5 +1,5 @@
 ﻿RugbyManagementSystem
-
+1.0.0.0
 
 winexe
 C#
@@ -12,7 +12,7 @@ TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\App.xaml
 5-1989135759
 1506133212
-3-1233169557
+5-216679205
 195566169279
 MainWindow.xaml;Themes\LoginButtonTheme.xaml;Themes\LoginTextBoxTheme.xaml;Themes\PasswordTextBoxTheme.xaml;Themes\RestoreButtonTheme.xaml;
 

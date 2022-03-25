@@ -26,3 +26,6 @@ C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagement
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\LoginButtonTheme.baml
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\MahApps.Metro.IconPacks.Core.dll
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\MahApps.Metro.IconPacks.Material.dll
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\Images\RugbyBall.png
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\RugbyManagementSystem_Content.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\RestoreButtonTheme.baml
