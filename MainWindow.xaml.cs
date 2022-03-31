@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.IconPacks;
+using RugbyManagementSystem.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,9 @@ namespace RugbyManagementSystem
         public MainWindow()
         {   
             InitializeComponent();
+            Window SecWin = new SecretaryWindow();
+            this.Close();
+            SecWin.Show();
         }
 
         private void OnPasswordChange(Object sender, RoutedEventArgs args)

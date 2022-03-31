@@ -21,14 +21,14 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Rectangle Fill="#1d1b29"/>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Margin="5">
                 <iconPacks:PackIconMaterial Kind="WindowMinimize" 
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center" 

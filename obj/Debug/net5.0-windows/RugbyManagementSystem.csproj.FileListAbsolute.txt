@@ -29,3 +29,16 @@ C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagement
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\Images\RugbyBall.png
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\RugbyManagementSystem_Content.g.cs
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\RestoreButtonTheme.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Windows\SecretaryWindow.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Windows\SecretaryWindow.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\MenuButtonTheme.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\SearchBarTheme.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\SortButtonTheme.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\MemberListItem.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\MemberView.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\MemberView.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\EmailsView.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\TeamsView.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\EmailsView.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\TeamsView.baml
