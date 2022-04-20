@@ -18,20 +18,21 @@
                                     VerticalAlignment="Center">
                             <Label Content="{Binding ID}"
                                    Foreground="White"
-                                   Margin="43,0,0,0"
+                                   Margin="53,0,0,0"
                                    Width="25"
                                    FontFamily="Fonts/#Dosis"/>
                             <Border Width="25" Height="25"
                                     Background="Red"
-                                    CornerRadius="25"/>
+                                    CornerRadius="25"
+                                    Margin="40,0,0,0"/>
                             <Label Content="{Binding TeamName}"
                                    Foreground="White"
-                                   Margin="33,0,0,0"
+                                   Margin="93,0,0,0"
                                    Width="120"
                                    FontFamily="Fonts/#Dosis"/>
                             <Label Content="{Binding Players}"
                                    Foreground="White"
-                                   Margin="66,0,0,0"
+                                   Margin="16,0,0,0"
                                    Width="100"
                                    FontFamily="Fonts/#Dosis"/>
                             <StackPanel Orientation="Horizontal"

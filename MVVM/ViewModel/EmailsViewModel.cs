@@ -11,6 +11,30 @@ namespace RugbyManagementSystem.MVVM.ViewModel
 {
     class EmailsViewModel : ObservableObject
     {
-        public ObservableCollection<MemberModel> Teams { get; set; }
+        public ObservableCollection<EmailModel> Emails { get; set; }
+
+        public EmailsViewModel()
+        {
+            Emails = new ObservableCollection<EmailModel>();
+
+            Emails.Add(new EmailModel
+            {
+                ID = "1",
+                MemberName = "Irek Chylewski",
+                Email = "irekchylewski@gmail.com"
+            });
+            Emails.Add(new EmailModel
+            {
+                ID = "2",
+                MemberName = "Erika Silvanovic",
+                Email = "erikasilvanovic@gmail.com"
+            });
+            Emails.Add(new EmailModel
+            {
+                ID = "3",
+                MemberName = "Adrian Szramka",
+                Email = "adrianszramka@gmail.com"
+            });
+        }
     }
 }

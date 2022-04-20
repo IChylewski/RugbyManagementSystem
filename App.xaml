@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="Themes/SortButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/MemberListItem.xaml"/>
                 <ResourceDictionary Source="Themes/TeamListItem.xaml"/>
+                <ResourceDictionary Source="Themes/EmailListItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:MembersViewModel}">

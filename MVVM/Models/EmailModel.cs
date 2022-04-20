@@ -7,15 +7,14 @@ using System.Windows.Media;
 
 namespace RugbyManagementSystem.MVVM.Models
 {
-    class MemberModel
+    class EmailModel
     {
         public string ID { get; set; }
         public string MemberName { get; set; }
-        public string Type { get; set; }
         public Brush RandomColor { get; set; }
         public string Email { get; set; }
 
-        public MemberModel ()
+        public EmailModel()
         {
             Random r = new Random();
             RandomColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233)));

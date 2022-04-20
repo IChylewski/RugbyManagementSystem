@@ -21,20 +21,22 @@ namespace RugbyManagementSystem.MVVM.ViewModel
             {
                 ID = "1",
                 MemberName = "Irek Chylewski",
-                Type = "Coach"
+                Type = "Coach",
+                Email = "irekchylewski@gmail.com"
             });
             Members.Add(new MemberModel
             {
                 ID = "2",
                 MemberName = "Erika Silvanovic",
-                Type = "Coach"
-
+                Type = "Coach",
+                Email = "erikasilvanovic@gmail.com"
             });
             Members.Add(new MemberModel
             {
                 ID = "3",
                 MemberName = "Adrian Szramka",
-                Type = "Coach"
+                Type = "Coach",
+                Email = "adrianszramka@gmail.com"
             });
         }
     }
