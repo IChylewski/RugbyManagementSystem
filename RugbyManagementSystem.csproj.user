@@ -57,6 +57,9 @@
     <Page Update="Themes\SortButtonTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\TeamListItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\SecretaryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

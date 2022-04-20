@@ -26,12 +26,12 @@ namespace RugbyManagementSystem.Windows
         }
         private void ButtonMinimize_Click(Object sender, MouseButtonEventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
         private void ButtonMaximize_Click(Object sender, MouseButtonEventArgs e)
         {
             PackIconMaterial maximizeIcon = sender as PackIconMaterial;
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            this.WindowState = WindowState.Maximized;
 
             maximizeIcon.Kind = PackIconMaterialKind.WindowRestore;
             maximizeIcon.MouseDown -= ButtonMaximize_Click;
@@ -40,7 +40,7 @@ namespace RugbyManagementSystem.Windows
         private void ButtonRestore_Click(Object sender, MouseButtonEventArgs e)
         {
             PackIconMaterial restoreIcon = sender as PackIconMaterial;
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            this.WindowState = WindowState.Normal;
 
             restoreIcon.Kind = PackIconMaterialKind.WindowMaximize;
             restoreIcon.MouseDown -= ButtonRestore_Click;

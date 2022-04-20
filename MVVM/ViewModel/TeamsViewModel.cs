@@ -13,5 +13,29 @@ namespace RugbyManagementSystem.MVVM.ViewModel
     {
         public ObservableCollection<TeamModel> Teams { get; set; }
 
+        public TeamsViewModel()
+        {
+            Teams = new ObservableCollection<TeamModel>();
+
+            Teams.Add(new TeamModel
+            {
+                ID = "1",
+                TeamName = "Power Rangers",
+                Players = "13/50"
+            });
+            Teams.Add(new TeamModel
+            {
+                ID = "1",
+                TeamName = "Dragons",
+                Players = "26/50"
+
+            });
+            Teams.Add(new TeamModel
+            {
+                ID = "1",
+                TeamName = "FC Lizards",
+                Players = "49/50"
+            });
+        }
     }
 }

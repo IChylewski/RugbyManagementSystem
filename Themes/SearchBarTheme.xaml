@@ -18,6 +18,7 @@
                                      VerticalContentAlignment="Center"
                                      Padding="5"
                                      Foreground="#CFCFCF"
+                                     FontFamily="Fonts/#Dosis"
                                      x:Name="SearchBox"/>
 
                             <TextBlock IsHitTestVisible="False"
@@ -27,6 +28,7 @@
                                        Margin="10,0,0,0"
                                        FontSize="11"
                                        Foreground="DarkGray"
+                                       FontFamily="Fonts/#Dosis"
                                        Grid.Column="1">
 
                                 <TextBlock.Style>
