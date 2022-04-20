@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\App.xaml
-15932726491
+18-1695505390
 1506133212
-16-237069113
+22468031165
 195566169279
-MainWindow.xaml;MVVM\View\EmailsView.xaml;MVVM\View\MemberView.xaml;MVVM\View\TeamsView.xaml;Themes\EmailListItem.xaml;Themes\LoginButtonTheme.xaml;Themes\LoginTextBoxTheme.xaml;Themes\MemberListItem.xaml;Themes\MenuButtonTheme.xaml;Themes\PasswordTextBoxTheme.xaml;Themes\RestoreButtonTheme.xaml;Themes\SearchBarTheme.xaml;Themes\SortButtonTheme.xaml;Themes\TeamListItem.xaml;Windows\SecretaryWindow.xaml;
+MainWindow.xaml;MVVM\View\EmailsView.xaml;MVVM\View\MemberView.xaml;MVVM\View\PlayersView.xaml;MVVM\View\TeamsView.xaml;Themes\EmailListItem.xaml;Themes\LoginButtonTheme.xaml;Themes\LoginTextBoxTheme.xaml;Themes\MemberListItem.xaml;Themes\MenuButtonTheme.xaml;Themes\PasswordTextBoxTheme.xaml;Themes\PlayerListItem.xaml;Themes\RestoreButtonTheme.xaml;Themes\SearchBarTheme.xaml;Themes\SortButtonTheme.xaml;Themes\TeamListItem.xaml;Windows\CoachWindow.xaml;Windows\SecretaryWindow.xaml;
 
 False
 

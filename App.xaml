@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Themes/MemberListItem.xaml"/>
                 <ResourceDictionary Source="Themes/TeamListItem.xaml"/>
                 <ResourceDictionary Source="Themes/EmailListItem.xaml"/>
+                <ResourceDictionary Source="Themes/PlayerListItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:MembersViewModel}">
@@ -32,6 +33,11 @@
             <DataTemplate DataType="{x:Type viewModel:EmailsViewModel}">
                 <view:EmailsView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:PlayersViewModel}">
+                <view:PlayersView/>
+            </DataTemplate>
+
 
         </ResourceDictionary>
 

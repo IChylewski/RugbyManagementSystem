@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RugbyManagementSystem.MVVM.ViewModel
 {
-    class MainViewModel : ObservableObject
+    class SecretaryViewModel : ObservableObject
     {
         public RelayCommand MembersViewCommand { get; set; }
         public RelayCommand TeamsViewCommand { get; set; }
@@ -28,7 +28,7 @@ namespace RugbyManagementSystem.MVVM.ViewModel
             }
         }
 
-        public MainViewModel()
+        public SecretaryViewModel()
         {
             MembersVM = new MembersViewModel();
             TeamsVM = new TeamsViewModel();

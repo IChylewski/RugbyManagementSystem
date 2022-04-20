@@ -44,3 +44,8 @@ C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagement
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\TeamsView.baml
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\TeamListItem.baml
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\EmailListItem.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Windows\CoachWindow.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Windows\CoachWindow.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\PlayerListItem.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\PlayersView.g.cs
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\MVVM\View\PlayersView.baml

@@ -13,7 +13,13 @@
     <Compile Update="MVVM\View\MemberView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\PlayersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\TeamsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\CoachWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\SecretaryWindow.xaml.cs">
@@ -28,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\MemberView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\PlayersView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\TeamsView.xaml">
@@ -51,6 +60,9 @@
     <Page Update="Themes\LoginTextBoxTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\PlayerListItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\RestoreButtonTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -61,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\TeamListItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CoachWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\SecretaryWindow.xaml">

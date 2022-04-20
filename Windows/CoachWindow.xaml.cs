@@ -1,5 +1,4 @@
 ﻿using MahApps.Metro.IconPacks;
-using RugbyManagementSystem.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,46 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RugbyManagementSystem
+namespace RugbyManagementSystem.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CoachWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {   
-
-
-        public MainWindow()
-        {   
+    public partial class CoachWindow : Window
+    {
+        public CoachWindow()
+        {
             InitializeComponent();
-            Window SecWin = new SecretaryWindow();
-            Window CoachWin = new CoachWindow();
-            this.Close();
-            CoachWin.Show();
-        }
-
-        private void OnPasswordChange(Object sender, RoutedEventArgs args)
-        {
-            if(PasswordBox.Password == "")
-            {
-                PasswordHint.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                PasswordHint.Visibility = Visibility.Hidden;
-            }
-            
-        }
-        private void OnLogInClick(Object sender, RoutedEventArgs args)
-        {
-            MessageBox.Show(PasswordBox.Password.ToString());
         }
         private void Border_MouseDown(Object sender, MouseButtonEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
