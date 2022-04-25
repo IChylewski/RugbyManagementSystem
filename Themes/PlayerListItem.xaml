@@ -13,52 +13,38 @@
                             Margin="8,2,8,2">
 
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,0,0"
+                                    Margin="0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
 
                             <Border Width="25" Height="25"
-                                    Background="{Binding RandomColor}"
-                                    CornerRadius="25"/>
+                                    Background="{Binding TeamLogo}"
+                                    CornerRadius="25"
+                                    Margin="40,5"/>
                             <Label Content="{Binding ID}"
                                    Foreground="White"
-                                   Margin="63,0,0,0"
-                                   Width="25"
-                                   FontFamily="Fonts/#Dosis"/>
+                                   Margin="5"
+                                   Width="100"
+                                   FontFamily="Fonts/#Dosis"
+                                   HorizontalContentAlignment="Center"/>
                             <Label Content="{Binding Name}"
                                    Foreground="White"
-                                   Margin="33,0,0,0"
-                                   Width="120"
-                                   FontFamily="Fonts/#Dosis"/>
+                                   Margin="5"
+                                   Width="100"
+                                   FontFamily="Fonts/#Dosis"
+                                   HorizontalContentAlignment="Center"/>
                             <Label Content="{Binding Type}"
                                    Foreground="White"
-                                   Margin="66,0,0,0"
+                                   Margin="5"
                                    Width="100"
-                                   FontFamily="Fonts/#Dosis"/>
+                                   FontFamily="Fonts/#Dosis"
+                                   HorizontalContentAlignment="Center"/>
                             <Label Content="{Binding OverallSkill}"
                                    Foreground="White"
-                                   Margin="66,0,0,0"
+                                   Margin="5"
                                    Width="100"
-                                   FontFamily="Fonts/#Dosis"/>
-                            <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        Width="100"
-                                        Margin="86,0,0,0">
-                                <iconPacks:PackIconMaterial Kind="Pencil" 
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center" 
-                                            Foreground="White"
-                                            Margin="2,5,2,5"
-                                            Background="Transparent"/>
-                                <iconPacks:PackIconMaterial Kind="Delete" 
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center" 
-                                            Foreground="White"
-                                            Margin="5"
-                                            Background="Transparent"/>
-                            </StackPanel>
-
+                                   FontFamily="Fonts/#Dosis"
+                                   HorizontalContentAlignment="Center"/>
                         </StackPanel>
 
                     </Border>

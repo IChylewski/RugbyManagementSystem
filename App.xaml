@@ -2,10 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml"
-             xmlns:local="clr-namespace:RugbyManagementSystem"
-             xmlns:viewModel="clr-namespace:RugbyManagementSystem.MVVM.ViewModel"
-             xmlns:view="clr-namespace:RugbyManagementSystem.MVVM.View">
-             
+             xmlns:local="clr-namespace:RugbyManagementSystem">
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,24 +18,9 @@
                 <ResourceDictionary Source="Themes/TeamListItem.xaml"/>
                 <ResourceDictionary Source="Themes/EmailListItem.xaml"/>
                 <ResourceDictionary Source="Themes/PlayerListItem.xaml"/>
+                <ResourceDictionary Source="Themes/SquadListItem.xaml"/>
+                <ResourceDictionary Source="Themes/ActionButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate DataType="{x:Type viewModel:MembersViewModel}">
-                <view:MemberView/>
-            </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewModel:TeamsViewModel}">
-                <view:TeamsView/>
-            </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewModel:EmailsViewModel}">
-                <view:EmailsView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:PlayersViewModel}">
-                <view:PlayersView/>
-            </DataTemplate>
-
 
         </ResourceDictionary>
 

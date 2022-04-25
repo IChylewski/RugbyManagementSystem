@@ -3,17 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RugbyManagementSystem.Windows" xmlns:viewModel="clr-namespace:RugbyManagementSystem.MVVM.ViewModel" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+        xmlns:local="clr-namespace:RugbyManagementSystem.Windows" 
+        xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
         Title="Rugby Teams Management" Height="600" Width="920"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         AllowsTransparency="True">
-
-    <Window.DataContext>
-        <viewModel:CoachViewModel/>
-    </Window.DataContext>
 
     <Border
         Background="#272537"
@@ -72,38 +69,600 @@
 
             <StackPanel Grid.Row="2"
                         Margin="0,35">
-                <RadioButton Content="Players"
+                <RadioButton Name="PlayersBtn"
+                             Content="Players"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
+                             FontWeight="Bold"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding PlayersViewCommand}"/>
-                <RadioButton Content="Teams"
+                             Click="RadioBtn_Click"/>
+                <RadioButton Name="SquadsBtn"
+                             Content="Squads"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
+                             FontWeight="Bold"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding SquadsViewCommand}"/>
+                             Click="RadioBtn_Click"/>
                 <RadioButton Content="Log Out"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
+                             FontWeight="Bold"
                              Style="{StaticResource MenuButtonTheme}"/>
             </StackPanel>
 
-            <Grid Grid.Row="2"
-                  Grid.Column="1">
+            <StackPanel Name="PlayersView"
+                        Orientation="Vertical"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="Visible"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        >
+                    <RadioButton Content="ID"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <RadioButton Content="Name"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <RadioButton Content="Type"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <TextBox Width="250"
+                                 Height="40"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Margin="5"
+                                 Style="{StaticResource ModernTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="1,5,1,5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <Label Content="Logo"
+                                       Foreground="White"
+                                       Margin="15,0,0,0"
+                                       Width="50"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="ID"
+                                       Foreground="White"
+                                       Margin="3,0,0,0"
+                                       Width="35"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Name"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="100"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Team"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="75"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Age"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="35"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Type"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="75"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Skill"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="35"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Action"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="100"
+                           FontWeight="SemiBold"/>
+                </StackPanel>
+                <ListView Name="PlayersList"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          HorizontalContentAlignment="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <Border Background="{Binding TeamLogo}"
+                                        CornerRadius="25"
+                                        Width="25" Height="25"
+                                        Margin="15,0,0,0"/>
+                                <Label Content="{Binding ID}"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="35"/>
+                                <Label Content="{Binding Name}"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="100"/>
+                                <Label Content="{Binding Team}"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="75"/>
+                                <Label Content="{Binding Age}"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="35"/>
+                                <Label Content="{Binding Type}"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="75"/>
+                                <Label Content="{Binding OverallSkill}"
+                                       Foreground="White"
+                                       Margin="25,0,0,0"
+                                       Width="35"/>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="25,0,0,0"
+                                            Width="100">
+                                    <iconPacks:PackIconMaterial 
+                                                            Kind="Football" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center" 
+                                                            Foreground="White"
+                                                            Margin="5,0,5,0"
+                                                            Background="Transparent"
+                                                            MouseDown="PlayerDevelopmentBtn_Click"
+                                                            Cursor="Hand"/>
+                                    <iconPacks:PackIconMaterial 
+                                                            Kind="Plus" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center" 
+                                                            Foreground="White"
+                                                            Margin="5,0,5,0"
+                                                            Background="Transparent"
+                                                            MouseDown="AddPlayerToTeamBtn_Click"
+                                                            Cursor="Hand"/>
+                                </StackPanel>
+                                
+                            </StackPanel>
+                        </DataTemplate>
 
-                <Grid>
-                    <ContentControl 
-                                    Margin="5"
-                                    Content="{Binding CurrentView}"/>
-                </Grid>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <StackPanel Name="SquadsView"
+                        Orientation="Vertical"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="Collapsed">
 
-            </Grid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top">
+                    <RadioButton Content="ID"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <RadioButton Content="Name"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <RadioButton Content="Players"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <TextBox Width="250"
+                                 Height="40"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Margin="5"
+                                 Style="{StaticResource ModernTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="1,5,1,5">
+                    <Label Content="Logo"
+                                       Foreground="White"
+                                       Margin="35,0,0,0"
+                                       Width="50"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="ID"
+                                       Foreground="White"
+                                       Margin="34,0,0,0"
+                                       Width="35"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Name"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Players"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="75"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Action"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"
+                           FontWeight="SemiBold"/>
+                </StackPanel>
+                <ListView Name="SquadsList"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="1"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                <Border Background="{Binding TeamLogo}"
+                                        CornerRadius="25"
+                                        Width="25" Height="25"
+                                        Margin="35,0,0,0"/>
+                                <Label Content="{Binding ID}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"/>
+                                <Label Content="{Binding Name}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"/>
+                                <Label Content="{Binding PlayersNumber}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="75"/>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="55,0,0,0"
+                                            Width="100">
+                                    <iconPacks:PackIconMaterial 
+                                                            Kind="AccountMultiple" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center" 
+                                                            Foreground="White"
+                                                            Margin="5,0,5,0"
+                                                            Background="Transparent"
+                                                            MouseDown="DisplayTeamSquadBtn_Click"
+                                                            Cursor="Hand"/>
+                                </StackPanel>
 
+                            </StackPanel>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <StackPanel Name="PlayerDevelopmentView"
+                        Orientation="Vertical"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="Collapsed">
+                <Label Content="Player Name"
+                       Foreground="White"
+                       FontSize="30"
+                       FontFamily="Fonts/#Dosis"
+                       HorizontalAlignment="Center"/>
+                <Label Content="Development"
+                       Foreground="Silver"
+                       FontSize="18"
+                       FontFamily="Fonts/#Dosis"
+                       HorizontalAlignment="Center"/>
+
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20">
+                    <Label Content="Passing"
+                           Foreground="White"
+                           FontSize="18"
+                           FontFamily="Fonts/#Dosis"
+                           HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Label Content="Standard"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="PassingStandardBox"
+                                 Width="50"/>
+                        <Label Content="Spin"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="PassingSpinBox"
+                                 Width="50"/>
+                        <Label Content="Pop"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="PassingPopBox"
+                                 Width="50"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20">
+                    <Label Content="Tackling"
+                           Foreground="White"
+                           FontSize="18"
+                           FontFamily="Fonts/#Dosis"
+                           HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Label Content="Front"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="TacklingFrontBox"
+                                 Width="50"/>
+                        <Label Content="Rear"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="TacklingRearBox"
+                                 Width="50"/>
+                        <Label Content="Side"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="TacklingSideBox"
+                                 Width="50"/>
+                        <Label Content="Scrabble"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="TacklingScrabbleBox"
+                                 Width="50"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20">
+                    <Label Content="Kicking"
+                           Foreground="White"
+                           FontSize="18"
+                           FontFamily="Fonts/#Dosis"
+                           HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Label Content="Drop"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="KickingDropBox"
+                                 Width="50"/>
+                        <Label Content="Punt"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="KickingPuntBox"
+                                 Width="50"/>
+                        <Label Content="Grubber"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="KickingGrubberBox"
+                                 Width="50"/>
+                        <Label Content="Goal"
+                               Foreground="White"
+                               FontSize="12"
+                               FontFamily="Fonts/#Dosis"/>
+                        <TextBox Name="KickingGoalBox"
+                                 Width="50"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Name="SaveBtn"
+                            Content="Save"
+                            Foreground="White"
+                            Style="{StaticResource ModernLoginButton}"/>
+            </StackPanel>
+            <StackPanel Name="TeamSelectionView"
+                        Orientation="Vertical"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="Collapsed">
+                <Label Content="Add Player To Team"
+                       Foreground="White"
+                       FontSize="30"
+                       FontFamily="Fonts/#Dosis"
+                       HorizontalAlignment="Center"/>
+                <Label Content="Selection"
+                       Foreground="Silver"
+                       FontSize="18"
+                       FontFamily="Fonts/#Dosis"
+                       HorizontalAlignment="Center"/>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="1,5,1,5"
+                            HorizontalAlignment="Center">
+                    <Label Content="Logo"
+                                       Foreground="White"
+                                       Margin="30,0,0,0"
+                                       Width="50"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="ID"
+                                       Foreground="White"
+                                       Margin="34,0,0,0"
+                                       Width="35"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Name"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Players"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="75"
+                           FontWeight="SemiBold"/>
+                </StackPanel>
+                <ListView Name="TeamSelection"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          HorizontalContentAlignment="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="1"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                <Border Background="{Binding TeamLogo}"
+                                        CornerRadius="25"
+                                        Width="25" Height="25"
+                                        Margin="35,0,0,0"/>
+                                <Label Content="{Binding ID}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"/>
+                                <Label Content="{Binding Name}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"/>
+                                <Label Content="{Binding PlayersNumber}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="75"/>
+                            </StackPanel>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <StackPanel Name="TeamSquadView"
+                        Orientation="Vertical"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Top">
+
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        >
+                    <RadioButton Content="ID"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <RadioButton Content="Name"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <RadioButton Content="Type"
+                                    Height="50"
+                                    FontSize="12"
+                                    Style="{StaticResource SortButtonTheme}"/>
+                    <TextBox Width="250"
+                                 Height="40"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Margin="5"
+                                 Style="{StaticResource ModernTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="1,5,1,5"
+                            HorizontalAlignment="Left">
+                    <Label Content="Logo"
+                                       Foreground="White"
+                                       Margin="35,0,0,0"
+                                       Width="50"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="ID"
+                                       Foreground="White"
+                                       Margin="33,0,0,0"
+                                       Width="35"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Name"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"
+                                       FontWeight="SemiBold"/>
+                    <Label Content="Age"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Skill"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"
+                           FontWeight="SemiBold"/>
+                    <Label Content="Action"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"
+                           FontWeight="SemiBold"/>
+                </StackPanel>
+                <ListView Name="TeamSquadList"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <Border Background="{Binding TeamLogo}"
+                                        CornerRadius="25"
+                                        Width="25" Height="25"
+                                        Margin="35,0,0,0"/>
+                                <Label Content="{Binding ID}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"/>
+                                <Label Content="{Binding Name}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="100"/>
+                                <Label Content="{Binding Team}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="75"/>
+                                <Label Content="{Binding Age}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"/>
+                                <Label Content="{Binding Type}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="75"/>
+                                <Label Content="{Binding OverallSkill}"
+                                       Foreground="White"
+                                       Margin="55,0,0,0"
+                                       Width="35"/>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="25,0,0,0"
+                                            Width="100">
+                                    <iconPacks:PackIconMaterial 
+                                                            Kind="Football" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center" 
+                                                            Foreground="White"
+                                                            Margin="5,0,5,0"
+                                                            Background="Transparent"
+                                                            MouseDown="PlayerDevelopmentBtn_Click"
+                                                            Cursor="Hand"/>
+                                    <iconPacks:PackIconMaterial 
+                                                            Kind="Plus" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center" 
+                                                            Foreground="White"
+                                                            Margin="5,0,5,0"
+                                                            Background="Transparent"
+                                                            MouseDown="AddPlayerToTeamBtn_Click"
+                                                            Cursor="Hand"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
         </Grid>
-
     </Border>
+    
 </Window>

@@ -7,18 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="MVVM\View\EmailsView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\MemberView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\PlayersView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\TeamsView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Windows\CoachWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -30,16 +18,7 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\EmailsView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\MemberView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\PlayersView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\TeamsView.xaml">
+    <Page Update="Themes\ActionButtonTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\EmailListItem.xaml">
@@ -70,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\SortButtonTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\SquadListItem.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\TeamListItem.xaml">
