@@ -20,7 +20,7 @@ namespace RugbyManagementSystem
             Window SecWin = new SecretaryWindow();
             Window CoachWin = new CoachWindow();
             this.Close();
-            CoachWin.Show();
+            SecWin.Show();
         }
 
         private void OnPasswordChange(Object sender, RoutedEventArgs args)

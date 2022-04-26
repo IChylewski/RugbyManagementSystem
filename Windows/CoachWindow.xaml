@@ -643,16 +643,14 @@
                                                             Foreground="White"
                                                             Margin="5,0,5,0"
                                                             Background="Transparent"
-                                                            MouseDown="PlayerDevelopmentBtn_Click"
                                                             Cursor="Hand"/>
                                     <iconPacks:PackIconMaterial 
-                                                            Kind="Plus" 
+                                                            Kind="Minus" 
                                                             VerticalAlignment="Center" 
                                                             HorizontalAlignment="Center" 
                                                             Foreground="White"
                                                             Margin="5,0,5,0"
                                                             Background="Transparent"
-                                                            MouseDown="AddPlayerToTeamBtn_Click"
                                                             Cursor="Hand"/>
                                 </StackPanel>
 

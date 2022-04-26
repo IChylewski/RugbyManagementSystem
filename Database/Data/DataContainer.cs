@@ -6,65 +6,94 @@ namespace RugbyManagementSystem.Database.Data
 {
     class DataContainer
     {
+        public List<MemberModel> Members { get; set; }
         public List<PlayerModel> Players { get; set; }
         public List<TeamModel> Teams { get; set; }
 
         public DataContainer()
         {
+            Members = new List<MemberModel>();
             Players = new List<PlayerModel>();
             Teams = new List<TeamModel>();
 
+            Members.Add(new MemberModel
+            (
+                1,
+                "Irek",
+                "Chylewski",
+                "irekchylewski@gmail.com",
+                new System.DateTime(1997, 09, 23),
+                "Adult Player",
+                "07746252576",
+                "52425235224"
+            ));
 
-            Players.Add(new PlayerModel
-            {
-                ID = "1",
-                Name = "Irek Chylewski",
-                Team = "Lizards",
-                Age = "16",
-                Type = "Junior",
-                OverallSkill = "3.2"
-            });
+            Members.Add(new MemberModel
+            (
+                2,
+                "Erika",
+                "Silvanovic",
+                "erikasilvanovic@gmail.com",
+                new System.DateTime(1997, 09, 23),
+                "Junior Player",
+                "07746252576",
+                "52425235224",
+                "Yes"
+            ));
 
-            Players.Add(new PlayerModel
-            {
-                ID = "2",
-                Name = "Adrian Szramka",
-                Team = "Dragons",
-                Age = "25",
-                Type = "Adult",
-                OverallSkill = "4"
-            });
+            Members.Add(new MemberModel
+            (
+                3,
+                "Adrian",
+                "Szramka",
+                "adrianszramka@gmail.com",
+                new System.DateTime(1997, 09, 23),
+                "Coach",
+                "07746252576"
+            ));
 
-            Players.Add(new PlayerModel
-            {
-                ID = "3",
-                Name = "Erika Silvanovic",
-                Team = "Monkeys",
-                Age = "12",
-                Type = "Junior",
-                OverallSkill = "2"
-            });
+            Members.Add(new MemberModel
+            (
+                4,
+                "Mateusz",
+                "Neumann",
+                "mateuszneumann@gmail.com",
+                new System.DateTime(1997, 09, 23),
+                "Adult Player",
+                "07746252576",
+                "52425235224"
+            ));
+
+            Members.Add(new MemberModel
+            (
+                5,
+                "Pawel",
+                "Wisniewski",
+                "pawelwisniewski@gmail.com",
+                new System.DateTime(1997, 09, 23),
+                "Adult Player",
+                "07746252576",
+                "52425235224"
+            ));
+
 
             Teams.Add(new TeamModel
-            {
-                ID = "1",
-                Name = "Dragons",
-                PlayersNumber = "10/50"
-            });
+            (
+                1,
+                "Dragons"
+            ));
 
             Teams.Add(new TeamModel
-            {
-                ID = "2",
-                Name = "Lizards",
-                PlayersNumber = "10/50"
-            });
+            (
+                2,
+                "Lizards"
+            ));
 
             Teams.Add(new TeamModel
-            {
-                ID = "3",
-                Name = "Monkeys",
-                PlayersNumber = "10/50"
-            });
+            (
+                3,
+                "Monkeys"
+            ));
 
 
         }

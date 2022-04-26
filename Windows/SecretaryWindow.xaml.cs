@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.IconPacks;
+using RugbyManagementSystem.Database.Data;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -10,9 +11,15 @@ namespace RugbyManagementSystem.Windows
     /// </summary>
     public partial class SecretaryWindow : Window
     {
+        private DataContainer dataContainer;
         public SecretaryWindow()
         {
             InitializeComponent();
+
+            dataContainer = new DataContainer();
+
+            MembersList.ItemsSource = dataContainer.Members;
+            TeamsList.ItemsSource = dataContainer.Teams;
         }
 
 
@@ -49,6 +56,23 @@ namespace RugbyManagementSystem.Windows
         private void ButtonExit_Click(Object sender, MouseButtonEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void RadioBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MembersBtn.IsChecked == true)
+            {
+                MembersView.Visibility = Visibility.Visible;
+
+                TeamsView.Visibility = Visibility.Collapsed;
+            }
+
+            if (TeamsBtn.IsChecked == true)
+            {
+                TeamsView.Visibility = Visibility.Visible;
+
+                MembersView.Visibility = Visibility.Collapsed;
+            }
         }
     }
 
