@@ -1,4 +1,6 @@
 ﻿using MahApps.Metro.IconPacks;
+using RugbyManagementSystem.Database;
+using RugbyManagementSystem.Database.Data;
 using RugbyManagementSystem.Windows;
 using System;
 using System.Windows;
@@ -13,6 +15,7 @@ namespace RugbyManagementSystem
     public partial class MainWindow : Window
     {
 
+        DataContainer database = new DataContainer();
 
         public MainWindow()
         {
@@ -21,6 +24,8 @@ namespace RugbyManagementSystem
             Window CoachWin = new CoachWindow();
             this.Close();
             SecWin.Show();
+
+            MessageBox.Show(database.Users[0].Login);
         }
 
         private void OnPasswordChange(Object sender, RoutedEventArgs args)

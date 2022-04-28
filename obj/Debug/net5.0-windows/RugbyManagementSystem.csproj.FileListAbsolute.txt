@@ -42,3 +42,8 @@ C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagement
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\PlayerListItem.baml
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\SquadListItem.baml
 C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\obj\Debug\net5.0-windows\Themes\ActionButtonTheme.baml
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\System.Data.SQLite.dll
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+C:\Users\semir\Desktop\Szkoła\HND\Graded Unit\Development Phase\RugbyManagementSystem\bin\Debug\net5.0-windows\runtimes\win-x86\native\SQLite.Interop.dll

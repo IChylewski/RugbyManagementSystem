@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+pr2raEEcyAL1ARKmgcpRqhZhi/w7EV+oTUlrNIynthPd0k5HmtNJEmXeiwpfhGriGC+slRVTWD6cKMqA6vKEQ==",
+  "dgSpecHash": "xKYcwquRF5qWSQVIW8iFeXUNzP9/6SFZ3wlqcfOC8tjSGdPJceTecUz4L2cGAUSO3zrgRrWTy3WM7z7JWpzWHg==",
   "success": true,
   "projectFilePath": "C:\\Users\\semir\\Desktop\\Szkoła\\HND\\Graded Unit\\Development Phase\\RugbyManagementSystem\\RugbyManagementSystem.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\semir\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512"
+    "C:\\Users\\semir\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512",
+    "C:\\Users\\semir\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.115.5\\stub.system.data.sqlite.core.netstandard.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\semir\\.nuget\\packages\\system.data.sqlite.core\\1.0.115.5\\system.data.sqlite.core.1.0.115.5.nupkg.sha512"
   ],
   "logs": []
 }

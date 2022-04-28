@@ -6,12 +6,17 @@ namespace RugbyManagementSystem.Database.Data
 {
     class DataContainer
     {
+        private DataBase dataBase;
         public List<MemberModel> Members { get; set; }
         public List<PlayerModel> Players { get; set; }
         public List<TeamModel> Teams { get; set; }
+        public List<UserModel> Users { get; set; }
 
         public DataContainer()
         {
+            dataBase = new DataBase();
+
+            Users = dataBase.SelectFromUsersTable();
             Members = new List<MemberModel>();
             Players = new List<PlayerModel>();
             Teams = new List<TeamModel>();
