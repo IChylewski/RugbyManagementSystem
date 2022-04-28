@@ -2,6 +2,7 @@
 using RugbyManagementSystem.Database.Data;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace RugbyManagementSystem.Windows
@@ -20,6 +21,7 @@ namespace RugbyManagementSystem.Windows
 
             MembersList.ItemsSource = dataContainer.Members;
             TeamsList.ItemsSource = dataContainer.Teams;
+            EmailsList.ItemsSource = dataContainer.Members;
         }
 
 
@@ -65,6 +67,9 @@ namespace RugbyManagementSystem.Windows
                 MembersView.Visibility = Visibility.Visible;
 
                 TeamsView.Visibility = Visibility.Collapsed;
+                EmailsView.Visibility = Visibility.Collapsed;
+                AddNewMemberView.Visibility = Visibility.Collapsed;
+                EditMemberView.Visibility = Visibility.Collapsed;
             }
 
             if (TeamsBtn.IsChecked == true)
@@ -72,6 +77,43 @@ namespace RugbyManagementSystem.Windows
                 TeamsView.Visibility = Visibility.Visible;
 
                 MembersView.Visibility = Visibility.Collapsed;
+                EmailsView.Visibility = Visibility.Collapsed;
+            }
+
+            if (EmailsBtn.IsChecked == true)
+            {
+                EmailsView.Visibility = Visibility.Visible;
+
+                MembersView.Visibility = Visibility.Collapsed;
+                TeamsView.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void AddMemberBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            MembersBtn.IsChecked = false;
+
+            AddNewMemberView.Visibility = Visibility.Visible;
+            MembersView.Visibility = Visibility.Collapsed;
+        }
+        private void EditMemberBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            MembersBtn.IsChecked = false;
+
+            EditMemberView.Visibility = Visibility.Visible;
+            MembersView.Visibility = Visibility.Collapsed;
+        }
+        private void TypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
+
+            //MessageBox.Show(cbi.ToString());
+            if(cbi.Content.ToString() == "Junior Player")
+            {
+                ConsentPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ConsentPanel.Visibility = Visibility.Collapsed;
             }
         }
     }
