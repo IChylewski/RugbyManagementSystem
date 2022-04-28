@@ -68,8 +68,11 @@ namespace RugbyManagementSystem.Windows
 
                 TeamsView.Visibility = Visibility.Collapsed;
                 EmailsView.Visibility = Visibility.Collapsed;
+
                 AddNewMemberView.Visibility = Visibility.Collapsed;
                 EditMemberView.Visibility = Visibility.Collapsed;
+                AddNewTeamView.Visibility = Visibility.Collapsed;
+                EditTeamView.Visibility = Visibility.Collapsed;
             }
 
             if (TeamsBtn.IsChecked == true)
@@ -78,6 +81,12 @@ namespace RugbyManagementSystem.Windows
 
                 MembersView.Visibility = Visibility.Collapsed;
                 EmailsView.Visibility = Visibility.Collapsed;
+
+                AddNewMemberView.Visibility = Visibility.Collapsed;
+                EditMemberView.Visibility = Visibility.Collapsed;
+
+                AddNewTeamView.Visibility = Visibility.Collapsed;
+                EditTeamView.Visibility = Visibility.Collapsed;
             }
 
             if (EmailsBtn.IsChecked == true)
@@ -86,6 +95,12 @@ namespace RugbyManagementSystem.Windows
 
                 MembersView.Visibility = Visibility.Collapsed;
                 TeamsView.Visibility = Visibility.Collapsed;
+
+                AddNewMemberView.Visibility = Visibility.Collapsed;
+                EditMemberView.Visibility = Visibility.Collapsed;
+
+                AddNewTeamView.Visibility = Visibility.Collapsed;
+                EditTeamView.Visibility = Visibility.Collapsed;
             }
         }
         private void AddMemberBtn_Click(object sender, MouseButtonEventArgs e)
@@ -115,6 +130,20 @@ namespace RugbyManagementSystem.Windows
             {
                 ConsentPanel.Visibility = Visibility.Collapsed;
             }
+        }
+        private void AddNewTeamBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            TeamsView.Visibility = Visibility.Collapsed;
+            TeamsBtn.IsChecked = false;
+
+            AddNewTeamView.Visibility = Visibility.Visible;
+        }
+        private void EditTeamBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            TeamsView.Visibility = Visibility.Collapsed;
+            TeamsBtn.IsChecked = false;
+
+            EditTeamView.Visibility = Visibility.Visible;
         }
     }
 
