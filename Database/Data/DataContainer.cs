@@ -18,28 +18,8 @@ namespace RugbyManagementSystem.Database.Data
 
             Users = dataBase.SelectFromUsersTable();
             Members = dataBase.SelectFromMembersTable();
+            Teams = dataBase.SelectFromTeamsTable();
             Players = new List<PlayerModel>();
-            Teams = new List<TeamModel>();
-
-
-            Teams.Add(new TeamModel
-            (
-                1,
-                "Dragons"
-            ));
-
-            Teams.Add(new TeamModel
-            (
-                2,
-                "Lizards"
-            ));
-
-            Teams.Add(new TeamModel
-            (
-                3,
-                "Monkeys"
-            ));
-
 
         }
     }

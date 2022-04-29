@@ -18,6 +18,7 @@ namespace RugbyManagementSystem.Windows
         // Variables
         private DataContainer dataContainer;
         private MemberModel member;
+        private TeamModel team;
 
         // Constructor
         public SecretaryWindow()
@@ -204,6 +205,21 @@ namespace RugbyManagementSystem.Windows
             TeamsBtn.IsChecked = false;
 
             EditTeamView.Visibility = Visibility.Visible;
+
+            PackIconMaterial editTeamButton = sender as PackIconMaterial;
+            int teamID = (int)editTeamButton.Tag;
+
+            //Finds user with ID that is as same as ID in the button Tag property
+
+            foreach (TeamModel x in dataContainer.Teams)
+            {
+                if (x.ID == teamID)
+                {
+                    team = x;
+                }
+            }
+
+            EditTeamNameBox.Text = team.Name;
         }
         private void TypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
         {
@@ -422,6 +438,83 @@ namespace RugbyManagementSystem.Windows
             int memberID = (int)deleteButton.Tag;
 
             dataContainer.dataBase.DeleteMember(memberID);
+
+            MessageBox.Show("Success");
+        }
+
+        private void CreateTeamBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool validation = true;                     // flag that indicates if validation proceess was succesfull
+
+            if (TeamNameBox.Text == "")
+            {
+                validation = false;
+            }
+            
+            if (validation == true)
+            {
+                dataContainer.dataBase.AddNewTeam(TeamNameBox.Text);
+
+                MessageBox.Show("Success");
+                FinishCreatingTeam();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Credentials");
+            }
+        }
+        private void FinishCreatingTeam()
+        {
+            TeamNameBox.Text = "";
+
+            AddNewTeamView.Visibility = Visibility.Collapsed;
+
+            TeamsBtn.IsChecked = true;
+            TeamsView.Visibility = Visibility.Visible;
+
+        }
+
+        private void EditTeamDetailsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            bool validation = true;                     // flag that indicates if validation proceess was succesfull
+
+            if (EditTeamNameBox.Text == "")
+            {
+                validation = false;
+            }
+           
+            if (validation == true)
+            {
+
+                dataContainer.dataBase.EditTeam(team.ID, EditTeamNameBox.Text);
+
+                MessageBox.Show("Success");
+                FinishEditingTeam();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Credentials");
+            }
+        }
+        private void FinishEditingTeam()
+        {
+            EditTeamNameBox.Text = "";
+
+
+            EditTeamView.Visibility = Visibility.Collapsed;
+
+            TeamsBtn.IsChecked = true;
+            TeamsView.Visibility = Visibility.Visible;
+
+        }
+        private void DeleteTeamBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Gets clicked button and its Tag that is binded to user ID
+            PackIconMaterial deleteButton = sender as PackIconMaterial;
+            int teamID = (int)deleteButton.Tag;
+
+            dataContainer.dataBase.DeleteTeam(teamID);
 
             MessageBox.Show("Success");
         }

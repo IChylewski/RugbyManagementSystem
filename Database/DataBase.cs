@@ -29,6 +29,9 @@ namespace RugbyManagementSystem.Database
 
             //DropMembersTable();
             //CreateMembersTable();
+
+            //DropTeamsTable();
+            //CreateTeamsTable();
         }
 
         public void CreateUsersTable()
@@ -67,22 +70,6 @@ namespace RugbyManagementSystem.Database
 
             return UsersList;
         }
-        public List<MemberModel> SelectFromMembersTable()
-        {
-            List<MemberModel> MembersList = new List<MemberModel>();
-
-            string sql = "SELECT * from Members";
-            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-
-            SQLiteDataReader reader = command.ExecuteReader();
-
-            while(reader.Read())
-            {
-                MembersList.Add(new MemberModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
-            };
-
-            return MembersList;
-        }
 
         public void CreateMembersTable()
         {
@@ -102,13 +89,30 @@ namespace RugbyManagementSystem.Database
             command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
-
         public void DropMembersTable()
         {
             string sql = "DROP TABLE IF EXISTS Members";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
+        public List<MemberModel> SelectFromMembersTable()
+        {
+            List<MemberModel> MembersList = new List<MemberModel>();
+
+            string sql = "SELECT * from Members";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                MembersList.Add(new MemberModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
+            };
+
+            return MembersList;
+        }
+
+
         public void AddNewMember(string firstName, string lastName, string email, string dob, string type, string phoneNumber, string sruNumber, string consent)
         {
             string sql = $"INSERT INTO Members(FirstName, LastName, Email, DOB, Type, PhoneNumber, SRUNumber, Consent) VALUES ('{firstName}','{lastName}','{email}','{dob}','{type}','{phoneNumber}','{sruNumber}','{consent}')";
@@ -130,5 +134,65 @@ namespace RugbyManagementSystem.Database
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
+
+        public void CreateTeamsTable()
+        {
+            string sql = "CREATE TABLE Teams(id INTEGER PRIMARY KEY, Name TEXT)";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+
+            sql = "INSERT INTO Teams (Name) VALUES ('Dragons')";
+            command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+
+            sql = "INSERT INTO Teams (Name) VALUES ('Lizards')";
+            command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public void DropTeamsTable()
+        {
+            string sql = "DROP TABLE IF EXISTS Teams";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public List<TeamModel> SelectFromTeamsTable()
+        {
+            List<TeamModel> TeamsList = new List<TeamModel>();
+
+            string sql = "SELECT * from Teams";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                TeamsList.Add(new TeamModel(reader.GetInt32(0), reader.GetString(1)));
+            };
+
+            return TeamsList;
+        }
+
+        public void AddNewTeam(string name)
+        {
+            string sql = $"INSERT INTO Teams(Name) VALUES ('{name}')";
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public void EditTeam(int id, string name)
+        {
+            string sql = $"UPDATE Teams SET Name = '{name}' WHERE ID = '{id}'";
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public void DeleteTeam(int id)
+        {
+            string sql = $"DELETE FROM Teams WHERE ID = '{id}'";
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+
     }
 }
