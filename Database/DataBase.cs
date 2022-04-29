@@ -116,6 +116,19 @@ namespace RugbyManagementSystem.Database
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
+        public void EditMember(int id, string firstName, string lastName, string email, string dob, string type, string phoneNumber, string sruNumber, string consent)
+        {
+            string sql = $"UPDATE Members SET FirstName = '{firstName}', LastName = '{lastName}', Email = '{email}', DOB = '{dob}', Type = '{type}', PhoneNumber = '{phoneNumber}', SRUNumber = '{sruNumber}', Consent = '{consent}' WHERE ID = '{id}'";
 
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public void DeleteMember(int id)
+        {
+            string sql = $"DELETE FROM Members WHERE ID = '{id}'";
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
     }
 }

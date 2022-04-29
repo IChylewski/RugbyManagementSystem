@@ -274,6 +274,10 @@ namespace RugbyManagementSystem.Windows
             {
                 validation = false;
             }
+            else if (ConsentChoiceBox.SelectedItem == null && ConsentPanel.Visibility == Visibility.Visible)
+            {
+                validation = false;
+            }
             if (validation == true)
             {
                 ComboBoxItem typeCbi = (ComboBoxItem)TypeChoiceBox.SelectedItem;
@@ -357,28 +361,69 @@ namespace RugbyManagementSystem.Windows
             {
                 validation = false;
             }
+            else if (EditConsentChoiceBox.SelectedItem == null && EditConsentPanel.Visibility == Visibility.Visible)
+            {
+                validation = false;
+            }
             if (validation == true)
             {
                 ComboBoxItem typeCbi = (ComboBoxItem)EditTypeChoiceBox.SelectedItem;
-                string typeString = typeCbi.Content.ToString();
+                string editTypeString = typeCbi.Content.ToString();
 
 
                 DateTime selectedDate = (DateTime)EditDOBPicker.SelectedDate;
-                string DOB = selectedDate.ToString("dd/MM/yyyy");
+                string editDOB = selectedDate.ToString("dd/MM/yyyy");
 
                 ComboBoxItem consentCbi;
-                string consent;
+                string editConsent;
 
                 if (EditConsentChoiceBox.SelectedItem != null)
                 {
                     consentCbi = (ComboBoxItem)EditConsentChoiceBox.SelectedItem;
-                    consent = consentCbi.Content.ToString();
+                    editConsent = consentCbi.Content.ToString();
                 }
                 else
                 {
-                    consent = "Not required";
+                    editConsent = "Not required";
                 }
+
+                dataContainer.dataBase.EditMember(member.ID, EditFirstNameBox.Text, EditLastNameBox.Text, EditEmailBox.Text, editDOB, editTypeString, EditPhoneNumberBox.Text, EditSRUNumberBox.Text, editConsent);
+
+                MessageBox.Show("Success");
+                FinishEditingMember();
             }
+            else
+            {
+                MessageBox.Show("Incorrect Credentials");
+            }
+        }
+        private void FinishEditingMember()
+        {
+            EditTypeChoiceBox.SelectedItem = null;
+            EditFirstNameBox.Text = "";
+            EditLastNameBox.Text = "";
+            EditEmailBox.Text = "";
+            EditDOBPicker.SelectedDate = null;
+            EditPhoneNumberBox.Text = "";
+            EditSRUNumberBox.Text = "";
+            EditConsentChoiceBox.SelectedItem = null;
+
+            EditMemberView.Visibility = Visibility.Collapsed;
+
+            MembersBtn.IsChecked = true;
+            MembersView.Visibility = Visibility.Visible;
+
+        }
+
+        private void DeleteMemberBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Gets clicked button and its Tag that is binded to user ID
+            PackIconMaterial deleteButton = sender as PackIconMaterial;
+            int memberID = (int)deleteButton.Tag;
+
+            dataContainer.dataBase.DeleteMember(memberID);
+
+            MessageBox.Show("Success");
         }
     }
 
