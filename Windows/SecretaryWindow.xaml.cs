@@ -1,6 +1,9 @@
 ﻿using MahApps.Metro.IconPacks;
+using RugbyManagementSystem.Database;
 using RugbyManagementSystem.Database.Data;
+using RugbyManagementSystem.Database.Models;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,7 +15,11 @@ namespace RugbyManagementSystem.Windows
     /// </summary>
     public partial class SecretaryWindow : Window
     {
+        // Variables
         private DataContainer dataContainer;
+        private MemberModel member;
+
+        // Constructor
         public SecretaryWindow()
         {
             InitializeComponent();
@@ -22,10 +29,15 @@ namespace RugbyManagementSystem.Windows
             MembersList.ItemsSource = dataContainer.Members;
             TeamsList.ItemsSource = dataContainer.Teams;
             EmailsList.ItemsSource = dataContainer.Members;
+
+
+
         }
 
 
+        // Methods
 
+        // These methods are event handlers for window operations
         private void Border_MouseDown(Object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -59,7 +71,7 @@ namespace RugbyManagementSystem.Windows
         {
             System.Windows.Application.Current.Shutdown();
         }
-
+        // These methods are event handlers for changing views
         private void RadioBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MembersBtn.IsChecked == true)
@@ -112,24 +124,72 @@ namespace RugbyManagementSystem.Windows
         }
         private void EditMemberBtn_Click(object sender, MouseButtonEventArgs e)
         {
+            
+            // Changes to view to Edit Member View
             MembersBtn.IsChecked = false;
-
             EditMemberView.Visibility = Visibility.Visible;
             MembersView.Visibility = Visibility.Collapsed;
-        }
-        private void TypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem cbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
 
-            //MessageBox.Show(cbi.ToString());
-            if(cbi.Content.ToString() == "Junior Player")
+            // Gets clicked button and its Tag that is binded to user ID
+            PackIconMaterial editButton = sender as PackIconMaterial;
+            int memberID = (int)editButton.Tag;
+
+            //Finds user with ID that is as same as ID in the button Tag property
+            
+            foreach (MemberModel x in dataContainer.Members)
             {
-                ConsentPanel.Visibility = Visibility.Visible;
+                if (x.ID == memberID)
+                {
+                    member = x;
+                }
             }
-            else
+
+            //Fills text boxes with details of found member
+
+            switch(member.Type)
             {
-                ConsentPanel.Visibility = Visibility.Collapsed;
+                case "Adult Player":
+                    {
+                        EditTypeChoiceBox.SelectedIndex = 0;
+                        break;
+                    }
+                case "Junior Player":
+                    {
+                        EditTypeChoiceBox.SelectedIndex = 1;
+                        break;
+                    }
+                case "Coach":
+                    {
+                        EditTypeChoiceBox.SelectedIndex = 2;
+                        break;
+                    }
             }
+
+            EditFirstNameBox.Text = member.FirstName;
+            EditLastNameBox.Text = member.LastName;
+            EditEmailBox.Text = member.Email;
+            EditDOBPicker.SelectedDate = DateTime.Parse(member.DOB);
+            EditPhoneNumberBox.Text = member.PhoneNumber;
+            EditSRUNumberBox.Text = member.SRUNumber;
+
+            switch(member.Consent)
+            {
+                case "Yes":
+                    {
+                        EditConsentChoiceBox.SelectedIndex = 0;
+                        break;
+                    }
+                case "No":
+                    {
+                        EditConsentChoiceBox.SelectedIndex = 1;
+                        break;
+                    }
+                case "Not required":
+                    {
+                        break;
+                    }
+            }
+
         }
         private void AddNewTeamBtn_Click(object sender, MouseButtonEventArgs e)
         {
@@ -144,6 +204,181 @@ namespace RugbyManagementSystem.Windows
             TeamsBtn.IsChecked = false;
 
             EditTeamView.Visibility = Visibility.Visible;
+        }
+        private void TypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
+
+            if(cbi != null)
+            {
+                if (cbi.Content.ToString() == "Junior Player")                      // if Junior Player type is selected panel showing consent combo box is displayed
+                {
+                    ConsentPanel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ConsentPanel.Visibility = Visibility.Collapsed;
+                }
+            }
+   
+        }
+        private void EditTypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cbi = EditTypeChoiceBox.SelectedItem as ComboBoxItem;
+
+            if (cbi != null)
+            {
+                if (cbi.Content.ToString() == "Junior Player")                      // if Junior Player type is selected panel showing consent combo box is displayed
+                {
+                    EditConsentPanel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    EditConsentPanel.Visibility = Visibility.Collapsed;
+                }
+            }
+
+        }
+
+
+        private void CreateMemberBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool validation = true;                     // flag that indicates if validation proceess was succesfull
+
+            if(TypeChoiceBox.SelectedItem == null)
+            {
+                validation = false;
+            }
+            else if(FirstNameBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (LastNameBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (EmailBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (DOBPicker.SelectedDate == null)
+            {
+                validation = false;
+            }
+            else if (PhoneNumberBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (SRUNumberBox.Text == "")
+            {
+                validation = false;
+            }
+            if (validation == true)
+            {
+                ComboBoxItem typeCbi = (ComboBoxItem)TypeChoiceBox.SelectedItem;
+                string typeString = typeCbi.Content.ToString();
+                
+
+                DateTime selectedDate = (DateTime)DOBPicker.SelectedDate;
+                string DOB = selectedDate.ToString("dd/MM/yyyy");
+
+                ComboBoxItem consentCbi;
+                string consent;
+
+                if(ConsentChoiceBox.SelectedItem != null)
+                {
+                    consentCbi = (ComboBoxItem)ConsentChoiceBox.SelectedItem;
+                    consent = consentCbi.Content.ToString();
+                }
+                else
+                {
+                    consent = "Not required";
+                }
+
+
+                dataContainer.dataBase.AddNewMember(FirstNameBox.Text, LastNameBox.Text, EmailBox.Text, DOB, typeString, PhoneNumberBox.Text, SRUNumberBox.Text, consent);
+
+                MessageBox.Show("Success");
+                FinishCreatingMember();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Credentials");
+            }
+        }
+        private void FinishCreatingMember()
+        {
+            TypeChoiceBox.SelectedItem = null;
+            FirstNameBox.Text = "";
+            LastNameBox.Text = "";
+            EmailBox.Text = "";
+            DOBPicker.SelectedDate = null;
+            PhoneNumberBox.Text = "";
+            SRUNumberBox.Text = "";
+            ConsentChoiceBox.SelectedItem = null;
+
+            AddNewMemberView.Visibility = Visibility.Collapsed;
+
+            MembersBtn.IsChecked = true;
+            MembersView.Visibility = Visibility.Visible;
+
+        }
+
+        private void EditMemberDetailsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            bool validation = true;                     // flag that indicates if validation proceess was succesfull
+
+            if (EditTypeChoiceBox.SelectedItem == null)
+            {
+                validation = false;
+            }
+            else if (EditFirstNameBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (EditLastNameBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (EditEmailBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (EditDOBPicker.SelectedDate == null)
+            {
+                validation = false;
+            }
+            else if (EditPhoneNumberBox.Text == "")
+            {
+                validation = false;
+            }
+            else if (EditSRUNumberBox.Text == "")
+            {
+                validation = false;
+            }
+            if (validation == true)
+            {
+                ComboBoxItem typeCbi = (ComboBoxItem)EditTypeChoiceBox.SelectedItem;
+                string typeString = typeCbi.Content.ToString();
+
+
+                DateTime selectedDate = (DateTime)EditDOBPicker.SelectedDate;
+                string DOB = selectedDate.ToString("dd/MM/yyyy");
+
+                ComboBoxItem consentCbi;
+                string consent;
+
+                if (EditConsentChoiceBox.SelectedItem != null)
+                {
+                    consentCbi = (ComboBoxItem)EditConsentChoiceBox.SelectedItem;
+                    consent = consentCbi.Content.ToString();
+                }
+                else
+                {
+                    consent = "Not required";
+                }
+            }
         }
     }
 

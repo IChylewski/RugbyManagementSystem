@@ -74,7 +74,8 @@
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
-                    <TextBox Width="200"
+                    <TextBox Name="LoginBox"
+                         Width="200"
                          Height="40"
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Left"
@@ -138,7 +139,7 @@
                         Foreground="White"
                         FontSize="12"
                         Style="{StaticResource ModernLoginButton}"
-                        Click="OnLogInClick"/>
+                        Click="LogInBtn_Click"/>
 
 
             </StackPanel>

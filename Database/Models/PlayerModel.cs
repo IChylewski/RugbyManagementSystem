@@ -23,7 +23,7 @@ namespace RugbyManagementSystem.Database.Models
         public int GoalKick { get; set; }
         
 
-        public PlayerModel(int id, string firstName, string lastName, string email, DateTime dob, string type, string phoneNumber, string sruNumber, string Consent = "Not Required") : base (id, firstName, lastName, email, dob, type, phoneNumber, sruNumber, Consent = "Not Required")
+        public PlayerModel(int id, string firstName, string lastName, string email, string dob, string type, string phoneNumber, string sruNumber, string Consent = "Not Required") : base (id, firstName, lastName, email, dob, type, phoneNumber, sruNumber, Consent = "Not Required")
         {
             StandardPass = 0;
             SpinPass = 0;

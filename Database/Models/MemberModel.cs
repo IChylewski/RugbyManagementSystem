@@ -15,14 +15,14 @@ namespace RugbyManagementSystem.Database.Models
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string Type { get; set; }
         public string PhoneNumber { get; set; }
         public string SRUNumber { get; set; }
         public string Consent { get; set; }
 
 
-        public MemberModel(int id, string firstName, string lastName, string email, DateTime dob, string type, string phoneNumber, string sruNumber = null, string consent = "Not Required")
+        public MemberModel(int id, string firstName, string lastName, string email, string dob, string type, string phoneNumber, string sruNumber = null, string consent = "Not Required")
         {
             Random r = new Random();
             LogoColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233)));
