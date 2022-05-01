@@ -1,9 +1,8 @@
 ﻿using MahApps.Metro.IconPacks;
-using RugbyManagementSystem.Database;
 using RugbyManagementSystem.Database.Data;
 using RugbyManagementSystem.Database.Models;
 using System;
-using System.Globalization;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,20 +15,22 @@ namespace RugbyManagementSystem.Windows
     public partial class SecretaryWindow : Window
     {
         // Variables
-        private DataContainer dataContainer;
-        private MemberModel member;
+        //private DataContainer dataContainer;
+        //private MemberModel member;
+        private CoachModel coach;
+        private JuniorPlayerModel juniorPlayer;
+        private PlayerModel adultPlayer;
         private TeamModel team;
 
         // Constructor
         public SecretaryWindow()
         {
             InitializeComponent();
+            DataContainer.UpdateMembersList();
 
-            dataContainer = new DataContainer();
-
-            MembersList.ItemsSource = dataContainer.Members;
-            TeamsList.ItemsSource = dataContainer.Teams;
-            EmailsList.ItemsSource = dataContainer.Members;
+            MembersList.ItemsSource = DataContainer.Members;
+            TeamsList.ItemsSource = DataContainer.Teams;
+            EmailsList.ItemsSource = DataContainer.Members;
 
 
 
@@ -125,7 +126,7 @@ namespace RugbyManagementSystem.Windows
         }
         private void EditMemberBtn_Click(object sender, MouseButtonEventArgs e)
         {
-            
+
             // Changes to view to Edit Member View
             MembersBtn.IsChecked = false;
             EditMemberView.Visibility = Visibility.Visible;
@@ -133,64 +134,114 @@ namespace RugbyManagementSystem.Windows
 
             // Gets clicked button and its Tag that is binded to user ID
             PackIconMaterial editButton = sender as PackIconMaterial;
-            int memberID = (int)editButton.Tag;
+            object[] identifier = editButton.Tag as object[];
+            int memberID = (int)identifier[0];
+            string memberType = (string)identifier[1];
 
             //Finds user with ID that is as same as ID in the button Tag property
-            
-            foreach (MemberModel x in dataContainer.Members)
-            {
-                if (x.ID == memberID)
-                {
-                    member = x;
-                }
-            }
 
-            //Fills text boxes with details of found member
 
-            switch(member.Type)
+            switch (memberType)
             {
-                case "Adult Player":
+                case "Coach":
                     {
-                        EditTypeChoiceBox.SelectedIndex = 0;
+                        foreach (CoachModel x in DataContainer.Coaches)
+                        {
+                            if (x.ID == memberID)
+                            {
+                                coach = x;
+                                adultPlayer = null;
+                                juniorPlayer = null;
+                                break;
+                            }
+                        }
                         break;
                     }
                 case "Junior Player":
                     {
-                        EditTypeChoiceBox.SelectedIndex = 1;
+                        foreach (JuniorPlayerModel x in DataContainer.JuniorPlayers)
+                        {
+                            if (x.ID == memberID)
+                            {
+                                juniorPlayer = x;
+                                adultPlayer = null;
+                                coach = null;
+                                break;
+                            }
+                        }
                         break;
                     }
-                case "Coach":
+                case "Adult Player":
                     {
-                        EditTypeChoiceBox.SelectedIndex = 2;
+                        foreach (PlayerModel x in DataContainer.AdultPlayers)
+                        {
+                            if (x.ID == memberID)
+                            {
+                                adultPlayer = x;
+                                coach = null;
+                                juniorPlayer = null;
+                                break;
+                            }
+                        }
                         break;
                     }
             }
 
-            EditFirstNameBox.Text = member.FirstName;
-            EditLastNameBox.Text = member.LastName;
-            EditEmailBox.Text = member.Email;
-            EditDOBPicker.SelectedDate = DateTime.Parse(member.DOB);
-            EditPhoneNumberBox.Text = member.PhoneNumber;
-            EditSRUNumberBox.Text = member.SRUNumber;
+            //Fills text boxes with details of found member
 
-            switch(member.Consent)
+            if (coach != null)
             {
-                case "Yes":
-                    {
-                        EditConsentChoiceBox.SelectedIndex = 0;
-                        break;
-                    }
-                case "No":
-                    {
-                        EditConsentChoiceBox.SelectedIndex = 1;
-                        break;
-                    }
-                case "Not required":
-                    {
-                        break;
-                    }
-            }
+                EditTypeChoiceBox.SelectedIndex = 2;
+                EditFirstNameBox.Text = coach.FirstName;
+                EditLastNameBox.Text = coach.LastName;
+                EditEmailBox.Text = coach.Email;
+                EditDOBPicker.SelectedDate = DateTime.Parse(coach.DOB);
+                EditPhoneNumberBox.Text = coach.PhoneNumber;
 
+
+            }
+            else if (adultPlayer != null)
+            {
+                EditTypeChoiceBox.SelectedIndex = 0;
+                EditFirstNameBox.Text = adultPlayer.FirstName;
+                EditLastNameBox.Text = adultPlayer.LastName;
+                EditEmailBox.Text = adultPlayer.Email;
+                EditDOBPicker.SelectedDate = DateTime.Parse(adultPlayer.DOB);
+                EditPhoneNumberBox.Text = adultPlayer.PhoneNumber;
+
+                PlayerOnlyPanel.Visibility = Visibility.Visible;
+
+                EditSRUNumberBox.Text = adultPlayer.SRUNumber;
+            }
+            else if (juniorPlayer != null)
+            {
+                EditTypeChoiceBox.SelectedIndex = 1;
+                EditFirstNameBox.Text = juniorPlayer.FirstName;
+                EditLastNameBox.Text = juniorPlayer.LastName;
+                EditEmailBox.Text = juniorPlayer.Email;
+                EditDOBPicker.SelectedDate = DateTime.Parse(juniorPlayer.DOB);
+                EditPhoneNumberBox.Text = juniorPlayer.PhoneNumber;
+
+                PlayerOnlyPanel.Visibility = Visibility.Visible;
+                EditConsentPanel.Visibility = Visibility.Visible;
+
+                EditSRUNumberBox.Text = juniorPlayer.SRUNumber;
+
+
+                switch (juniorPlayer.Consent)
+                {
+                    case "Yes":
+                        {
+                            EditConsentChoiceBox.SelectedIndex = 0;
+                            break;
+                        }
+                    case "No":
+                        {
+                            EditConsentChoiceBox.SelectedIndex = 1;
+                            break;
+                        }
+                }
+            }
         }
         private void AddNewTeamBtn_Click(object sender, MouseButtonEventArgs e)
         {
@@ -211,7 +262,7 @@ namespace RugbyManagementSystem.Windows
 
             //Finds user with ID that is as same as ID in the button Tag property
 
-            foreach (TeamModel x in dataContainer.Teams)
+            foreach (TeamModel x in DataContainer.Teams)
             {
                 if (x.ID == teamID)
                 {
@@ -225,18 +276,28 @@ namespace RugbyManagementSystem.Windows
         {
             ComboBoxItem cbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
 
-            if(cbi != null)
+            if (cbi != null)
             {
-                if (cbi.Content.ToString() == "Junior Player")                      // if Junior Player type is selected panel showing consent combo box is displayed
+                if (cbi.Content.ToString() == "Junior Player" || cbi.Content.ToString() == "Adult Player")
                 {
-                    ConsentPanel.Visibility = Visibility.Visible;
+                    PlayerOnlyPanel.Visibility = Visibility.Visible;
+
+                    if (cbi.Content.ToString() == "Junior Player")                      // if Junior Player type is selected panel showing consent combo box is displayed
+                    {
+                        ConsentPanel.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        ConsentPanel.Visibility = Visibility.Collapsed;
+                    }
                 }
-                else
+                if (cbi.Content.ToString() == "Coach")
                 {
-                    ConsentPanel.Visibility = Visibility.Collapsed;
+                    PlayerOnlyPanel.Visibility = Visibility.Collapsed;
                 }
             }
-   
+
+
         }
         private void EditTypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
         {
@@ -244,61 +305,139 @@ namespace RugbyManagementSystem.Windows
 
             if (cbi != null)
             {
-                if (cbi.Content.ToString() == "Junior Player")                      // if Junior Player type is selected panel showing consent combo box is displayed
+                if (cbi.Content.ToString() == "Junior Player" || cbi.Content.ToString() == "Adult Player")
                 {
-                    EditConsentPanel.Visibility = Visibility.Visible;
+                    EditPlayerOnlyPanel.Visibility = Visibility.Visible;
+
+                    if (cbi.Content.ToString() == "Junior Player")                      // if Junior Player type is selected panel showing consent combo box is displayed
+                    {
+                        EditConsentPanel.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        EditConsentPanel.Visibility = Visibility.Collapsed;
+                    }
+
                 }
-                else
+                if (cbi.Content.ToString() == "Coach")
                 {
-                    EditConsentPanel.Visibility = Visibility.Collapsed;
+                    EditPlayerOnlyPanel.Visibility = Visibility.Collapsed;
                 }
             }
 
+
         }
-
-
         private void CreateMemberBtn_Click(object sender, RoutedEventArgs e)
         {
 
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
-            if(TypeChoiceBox.SelectedItem == null)
+            ComboBoxItem typeCbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
+
+            switch (typeCbi.Content.ToString())
             {
-                validation = false;
+                case "Coach":
+                    {
+                        if (TypeChoiceBox.SelectedItem == null)
+                        {
+                            validation = false;
+                        }
+                        else if (FirstNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (LastNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EmailBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (DOBPicker.SelectedDate == null)
+                        {
+                            validation = false;
+                        }
+                        else if (PhoneNumberBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        break;
+                    }
+                case "Adult Player":
+                    {
+                        if (TypeChoiceBox.SelectedItem == null)
+                        {
+                            validation = false;
+                        }
+                        else if (FirstNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (LastNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EmailBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (DOBPicker.SelectedDate == null)
+                        {
+                            validation = false;
+                        }
+                        else if (PhoneNumberBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (SRUNumberBox.Text == "" && PlayerOnlyPanel.Visibility == Visibility.Visible)
+                        {
+                            validation = false;
+                        }
+                        break;
+                    }
+                case "Junior Player":
+                    {
+                        if (TypeChoiceBox.SelectedItem == null)
+                        {
+                            validation = false;
+                        }
+                        else if (FirstNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (LastNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EmailBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (DOBPicker.SelectedDate == null)
+                        {
+                            validation = false;
+                        }
+                        else if (PhoneNumberBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (SRUNumberBox.Text == "" && PlayerOnlyPanel.Visibility == Visibility.Visible)
+                        {
+                            validation = false;
+                        }
+                        else if (ConsentChoiceBox.SelectedItem == null && ConsentPanel.Visibility == Visibility.Visible)
+                        {
+                            validation = false;
+                        }
+                        break;
+                    }
             }
-            else if(FirstNameBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (LastNameBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (EmailBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (DOBPicker.SelectedDate == null)
-            {
-                validation = false;
-            }
-            else if (PhoneNumberBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (SRUNumberBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (ConsentChoiceBox.SelectedItem == null && ConsentPanel.Visibility == Visibility.Visible)
-            {
-                validation = false;
-            }
+
+
             if (validation == true)
             {
-                ComboBoxItem typeCbi = (ComboBoxItem)TypeChoiceBox.SelectedItem;
                 string typeString = typeCbi.Content.ToString();
-                
 
                 DateTime selectedDate = (DateTime)DOBPicker.SelectedDate;
                 string DOB = selectedDate.ToString("dd/MM/yyyy");
@@ -306,18 +445,30 @@ namespace RugbyManagementSystem.Windows
                 ComboBoxItem consentCbi;
                 string consent;
 
-                if(ConsentChoiceBox.SelectedItem != null)
+                switch (typeString)
                 {
-                    consentCbi = (ComboBoxItem)ConsentChoiceBox.SelectedItem;
-                    consent = consentCbi.Content.ToString();
-                }
-                else
-                {
-                    consent = "Not required";
-                }
+                    case "Coach":
+                        {
+                            DataContainer.dataBase.AddNewCoach(FirstNameBox.Text, LastNameBox.Text, EmailBox.Text, DOB, PhoneNumberBox.Text);
+                            DataContainer.UpdateCoachesList();
+                            break;
+                        }
+                    case "Junior Player":
+                        {
+                            consentCbi = (ComboBoxItem)ConsentChoiceBox.SelectedItem;
+                            consent = consentCbi.Content.ToString();
 
-
-                dataContainer.dataBase.AddNewMember(FirstNameBox.Text, LastNameBox.Text, EmailBox.Text, DOB, typeString, PhoneNumberBox.Text, SRUNumberBox.Text, consent);
+                            DataContainer.dataBase.AddNewJuniorPlayer(FirstNameBox.Text, LastNameBox.Text, EmailBox.Text, DOB, PhoneNumberBox.Text, SRUNumberBox.Text, consent);
+                            DataContainer.UpdateJuniorPlayersList();
+                            break;
+                        }
+                    case "Adult Player":
+                        {
+                            DataContainer.dataBase.AddNewPlayer(FirstNameBox.Text, LastNameBox.Text, EmailBox.Text, DOB, PhoneNumberBox.Text, SRUNumberBox.Text);
+                            DataContainer.UpdateAdultPlayersList();
+                            break;
+                        }
+                }
 
                 MessageBox.Show("Success");
                 FinishCreatingMember();
@@ -338,10 +489,15 @@ namespace RugbyManagementSystem.Windows
             SRUNumberBox.Text = "";
             ConsentChoiceBox.SelectedItem = null;
 
+            DataContainer.UpdateMembersList();
+            MembersList.Items.Refresh();
+            EmailsList.Items.Refresh();
+
             AddNewMemberView.Visibility = Visibility.Collapsed;
 
             MembersBtn.IsChecked = true;
             MembersView.Visibility = Visibility.Visible;
+
 
         }
 
@@ -349,61 +505,143 @@ namespace RugbyManagementSystem.Windows
         {
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
-            if (EditTypeChoiceBox.SelectedItem == null)
+            ComboBoxItem typeCbi = EditTypeChoiceBox.SelectedItem as ComboBoxItem;
+
+            switch (typeCbi.Content.ToString())
             {
-                validation = false;
+                case "Coach":
+                    {
+                        if (EditTypeChoiceBox.SelectedItem == null)
+                        {
+                            validation = false;
+                        }
+                        else if (EditFirstNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditLastNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditEmailBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditDOBPicker.SelectedDate == null)
+                        {
+                            validation = false;
+                        }
+                        else if (EditPhoneNumberBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        break;
+                    }
+                case "Adult Player":
+                    {
+                        if (EditTypeChoiceBox.SelectedItem == null)
+                        {
+                            validation = false;
+                        }
+                        else if (EditFirstNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditLastNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditEmailBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditDOBPicker.SelectedDate == null)
+                        {
+                            validation = false;
+                        }
+                        else if (EditPhoneNumberBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditSRUNumberBox.Text == "" && EditPlayerOnlyPanel.Visibility == Visibility.Visible)
+                        {
+                            validation = false;
+                        }
+                        break;
+                    }
+                case "Junior Player":
+                    {
+                        if (EditTypeChoiceBox.SelectedItem == null)
+                        {
+                            validation = false;
+                        }
+                        else if (EditFirstNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditLastNameBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditEmailBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditDOBPicker.SelectedDate == null)
+                        {
+                            validation = false;
+                        }
+                        else if (EditPhoneNumberBox.Text == "")
+                        {
+                            validation = false;
+                        }
+                        else if (EditSRUNumberBox.Text == "" && EditPlayerOnlyPanel.Visibility == Visibility.Visible)
+                        {
+                            validation = false;
+                        }
+                        else if (EditConsentChoiceBox.SelectedItem == null && EditConsentPanel.Visibility == Visibility.Visible)
+                        {
+                            validation = false;
+                        }
+                        break;
+                    }
             }
-            else if (EditFirstNameBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (EditLastNameBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (EditEmailBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (EditDOBPicker.SelectedDate == null)
-            {
-                validation = false;
-            }
-            else if (EditPhoneNumberBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (EditSRUNumberBox.Text == "")
-            {
-                validation = false;
-            }
-            else if (EditConsentChoiceBox.SelectedItem == null && EditConsentPanel.Visibility == Visibility.Visible)
-            {
-                validation = false;
-            }
+
+
             if (validation == true)
             {
-                ComboBoxItem typeCbi = (ComboBoxItem)EditTypeChoiceBox.SelectedItem;
-                string editTypeString = typeCbi.Content.ToString();
-
+                string typeString = typeCbi.Content.ToString();
 
                 DateTime selectedDate = (DateTime)EditDOBPicker.SelectedDate;
-                string editDOB = selectedDate.ToString("dd/MM/yyyy");
+                string DOB = selectedDate.ToString("dd/MM/yyyy");
 
                 ComboBoxItem consentCbi;
-                string editConsent;
+                string consent;
 
-                if (EditConsentChoiceBox.SelectedItem != null)
+                switch (typeString)
                 {
-                    consentCbi = (ComboBoxItem)EditConsentChoiceBox.SelectedItem;
-                    editConsent = consentCbi.Content.ToString();
-                }
-                else
-                {
-                    editConsent = "Not required";
-                }
+                    case "Coach":
+                        {
+                            DataContainer.dataBase.EditCoach(coach.ID, EditFirstNameBox.Text, EditLastNameBox.Text, EditEmailBox.Text, DOB, EditPhoneNumberBox.Text);
+                            DataContainer.UpdateCoachesList();
+                            break;
+                        }
+                    case "Junior Player":
+                        {
+                            consentCbi = (ComboBoxItem)EditConsentChoiceBox.SelectedItem;
+                            consent = consentCbi.Content.ToString();
 
-                dataContainer.dataBase.EditMember(member.ID, EditFirstNameBox.Text, EditLastNameBox.Text, EditEmailBox.Text, editDOB, editTypeString, EditPhoneNumberBox.Text, EditSRUNumberBox.Text, editConsent);
+                            DataContainer.dataBase.EditJuniorPlayer(juniorPlayer.ID, EditFirstNameBox.Text, EditLastNameBox.Text, EditEmailBox.Text, DOB, EditPhoneNumberBox.Text, EditSRUNumberBox.Text, consent);
+                            DataContainer.UpdateJuniorPlayersList();
+                            break;
+                        }
+                    case "Adult Player":
+                        {
+                            DataContainer.dataBase.EditPlayer(adultPlayer.ID, EditFirstNameBox.Text, EditLastNameBox.Text, EditEmailBox.Text, DOB, EditPhoneNumberBox.Text, EditSRUNumberBox.Text);
+                            DataContainer.UpdateAdultPlayersList();
+                            break;
+                        }
+                }
 
                 MessageBox.Show("Success");
                 FinishEditingMember();
@@ -412,6 +650,7 @@ namespace RugbyManagementSystem.Windows
             {
                 MessageBox.Show("Incorrect Credentials");
             }
+
         }
         private void FinishEditingMember()
         {
@@ -424,6 +663,10 @@ namespace RugbyManagementSystem.Windows
             EditSRUNumberBox.Text = "";
             EditConsentChoiceBox.SelectedItem = null;
 
+            DataContainer.UpdateMembersList();
+            MembersList.Items.Refresh();
+            EmailsList.Items.Refresh();
+
             EditMemberView.Visibility = Visibility.Collapsed;
 
             MembersBtn.IsChecked = true;
@@ -434,12 +677,40 @@ namespace RugbyManagementSystem.Windows
         private void DeleteMemberBtn_Click(object sender, MouseButtonEventArgs e)
         {
             // Gets clicked button and its Tag that is binded to user ID
-            PackIconMaterial deleteButton = sender as PackIconMaterial;
-            int memberID = (int)deleteButton.Tag;
+            PackIconMaterial editButton = sender as PackIconMaterial;
+            object[] identifier = editButton.Tag as object[];
+            int memberID = (int)identifier[0];
+            string memberType = (string)identifier[1];
 
-            dataContainer.dataBase.DeleteMember(memberID);
+            //Finds user with ID that is as same as ID in the button Tag property
+
+
+            switch (memberType)
+            {
+                case "Coach":
+                    {
+                        DataContainer.dataBase.DeleteCoach(memberID);
+                        DataContainer.UpdateCoachesList();
+                        break;
+                    }
+                case "Junior Player":
+                    {
+                        DataContainer.dataBase.DeleteJuniorPlayer(memberID);
+                        DataContainer.UpdateJuniorPlayersList();
+                        break;
+                    }
+                case "Adult Player":
+                    {
+                        DataContainer.dataBase.DeletePlayer(memberID);
+                        DataContainer.UpdateAdultPlayersList();
+                        break;
+                    }
+            }
 
             MessageBox.Show("Success");
+            DataContainer.UpdateMembersList();
+            MembersList.Items.Refresh();
+            EmailsList.Items.Refresh();
         }
 
         private void CreateTeamBtn_Click(object sender, RoutedEventArgs e)
@@ -451,10 +722,10 @@ namespace RugbyManagementSystem.Windows
             {
                 validation = false;
             }
-            
+
             if (validation == true)
             {
-                dataContainer.dataBase.AddNewTeam(TeamNameBox.Text);
+                DataContainer.dataBase.AddNewTeam(TeamNameBox.Text);
 
                 MessageBox.Show("Success");
                 FinishCreatingTeam();
@@ -467,6 +738,9 @@ namespace RugbyManagementSystem.Windows
         private void FinishCreatingTeam()
         {
             TeamNameBox.Text = "";
+
+            DataContainer.UpdateTeamsList();
+            TeamsList.Items.Refresh();
 
             AddNewTeamView.Visibility = Visibility.Collapsed;
 
@@ -483,11 +757,10 @@ namespace RugbyManagementSystem.Windows
             {
                 validation = false;
             }
-           
+
             if (validation == true)
             {
-
-                dataContainer.dataBase.EditTeam(team.ID, EditTeamNameBox.Text);
+                DataContainer.dataBase.EditTeam(team.ID, EditTeamNameBox.Text);
 
                 MessageBox.Show("Success");
                 FinishEditingTeam();
@@ -501,6 +774,8 @@ namespace RugbyManagementSystem.Windows
         {
             EditTeamNameBox.Text = "";
 
+            DataContainer.UpdateTeamsList();
+            TeamsList.Items.Refresh();
 
             EditTeamView.Visibility = Visibility.Collapsed;
 
@@ -514,9 +789,80 @@ namespace RugbyManagementSystem.Windows
             PackIconMaterial deleteButton = sender as PackIconMaterial;
             int teamID = (int)deleteButton.Tag;
 
-            dataContainer.dataBase.DeleteTeam(teamID);
+            DataContainer.dataBase.DeleteTeam(teamID);
 
+            DataContainer.UpdateTeamsList();
+            TeamsList.Items.Refresh();
             MessageBox.Show("Success");
+        }
+        private void CopyToClipBoardBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Gets clicked button and its Tag that is binded to user ID
+            // Gets clicked button and its Tag that is binded to user ID
+            PackIconMaterial editButton = sender as PackIconMaterial;
+            object[] identifier = editButton.Tag as object[];
+            int memberID = (int)identifier[0];
+            string memberType = (string)identifier[1];
+
+            //Finds user with ID that is as same as ID in the button Tag property
+
+
+            switch (memberType)
+            {
+                case "Coach":
+                    {
+                        foreach (CoachModel x in DataContainer.Coaches)
+                        {
+                            if (x.ID == memberID)
+                            {
+                                Clipboard.SetText(x.Email);
+                                MessageBox.Show("Email copied to clipboard");
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                case "Junior Player":
+                    {
+                        foreach (JuniorPlayerModel x in DataContainer.JuniorPlayers)
+                        {
+                            if (x.ID == memberID)
+                            {
+                                Clipboard.SetText(x.Email);
+                                MessageBox.Show("Email copied to clipboard");
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                case "Adult Player":
+                    {
+                        foreach (PlayerModel x in DataContainer.AdultPlayers)
+                        {
+                            if (x.ID == memberID)
+                            {
+                                Clipboard.SetText(x.Email);
+                                MessageBox.Show("Email copied to clipboard");
+                                break;
+                            }
+                        }
+                        break;
+                    }
+
+
+
+            }
+        }
+        private void LogOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.Show();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
         }
     }
 

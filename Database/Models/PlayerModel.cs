@@ -1,12 +1,15 @@
-﻿using System;
+﻿using RugbyManagementSystem.Database.Data;
+using System;
 using System.Windows.Media;
 
 namespace RugbyManagementSystem.Database.Models
 {
-    class PlayerModel : MemberModel
+    public class PlayerModel : MemberModel
     {
-        public string Team { get; set; }
-        public int Age { get; set; }
+        //Fields
+        public int TeamID { get; set; }
+        public string SRUNumber { get; set; }
+        public string TeamName { get; set; }
 
         //Skills
         public int OverallSkill { get; set; }
@@ -21,10 +24,14 @@ namespace RugbyManagementSystem.Database.Models
         public int PuntKick { get; set; }
         public int GrubberKick { get; set; }
         public int GoalKick { get; set; }
-        
 
-        public PlayerModel(int id, string firstName, string lastName, string email, string dob, string type, string phoneNumber, string sruNumber, string Consent = "Not Required") : base (id, firstName, lastName, email, dob, type, phoneNumber, sruNumber, Consent = "Not Required")
+
+        public PlayerModel(int id, string firstName, string lastName, string email, string dob, string phoneNumber, string sruNumber, int teamID, string type = "Adult Player") : base (id, firstName, lastName, email, dob, phoneNumber, type)
         {
+            TeamID = teamID;
+            SRUNumber = sruNumber;
+
+
             StandardPass = 0;
             SpinPass = 0;
             PopPass = 0;
@@ -48,6 +55,8 @@ namespace RugbyManagementSystem.Database.Models
                             PuntKick +
                             GrubberKick +
                             GoalKick) / 11;
+
+            //FindTeamName();
         }
 
         public void UpdateOverallSkill()
@@ -63,6 +72,20 @@ namespace RugbyManagementSystem.Database.Models
                             PuntKick +
                             GrubberKick +
                             GoalKick) / 11;
+        }
+        public void FindTeamName()
+        {
+            foreach(TeamModel x in DataContainer.Teams)
+            {
+                if(TeamID == x.ID)
+                {
+                    TeamName = x.Name;
+                }
+                else
+                {
+                    TeamName = "Free";
+                }
+            }
         }
     }
 }

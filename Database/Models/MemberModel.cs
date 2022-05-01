@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace RugbyManagementSystem.Database.Models
 {
-    class MemberModel
+    public class MemberModel
     {
         public Brush LogoColor { get; set; }
         public int ID { get; set; }
@@ -16,13 +16,12 @@ namespace RugbyManagementSystem.Database.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public string DOB { get; set; }
-        public string Type { get; set; }
         public string PhoneNumber { get; set; }
-        public string SRUNumber { get; set; }
-        public string Consent { get; set; }
+        public string Type { get; set; }
+        public object[] Identifier { get; set; }
 
 
-        public MemberModel(int id, string firstName, string lastName, string email, string dob, string type, string phoneNumber, string sruNumber = null, string consent = "Not Required")
+        public MemberModel(int id, string firstName, string lastName, string email, string dob, string phoneNumber, string type)
         {
             Random r = new Random();
             LogoColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233)));
@@ -32,12 +31,12 @@ namespace RugbyManagementSystem.Database.Models
             LastName = lastName;
             Email = email;
             DOB = dob;
-            Type = type;
             PhoneNumber = phoneNumber;
-            SRUNumber = sruNumber;
-            Consent = consent;
+            Type = type;
             
             FullName = FirstName + " " + LastName;
+
+            Identifier = new object[2] { id, type};
 
 
         }

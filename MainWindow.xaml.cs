@@ -4,6 +4,7 @@ using RugbyManagementSystem.Database.Data;
 using RugbyManagementSystem.Database.Models;
 using RugbyManagementSystem.Windows;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +17,6 @@ namespace RugbyManagementSystem
     public partial class MainWindow : Window
     {
         // Variables
-        private DataContainer database = new DataContainer(); 
         private Window secWin;
         private Window coachWin;
 
@@ -28,6 +28,7 @@ namespace RugbyManagementSystem
             coachWin = new CoachWindow();
 
             this.Close();
+            coachWin.Show();
             secWin.Show();
 
         }
@@ -52,7 +53,7 @@ namespace RugbyManagementSystem
         { 
             bool verified = false;                                 // flag that indicates if the details are verified
 
-            foreach (UserModel user in database.Users)          /// Loops through users list to verify details
+            foreach (UserModel user in DataContainer.Users)          /// Loops through users list to verify details
             {
                 if (user.Login == LoginBox.Text)
                 {
@@ -119,6 +120,11 @@ namespace RugbyManagementSystem
         private void ButtonExit_Click(Object sender, MouseButtonEventArgs e)      // Shutdowns application on click
         {
             System.Windows.Application.Current.Shutdown();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
         }
     }
 }

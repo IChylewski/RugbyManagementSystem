@@ -134,11 +134,7 @@
                                        Margin="15,0,0,0"
                                        Width="50"
                                        FontWeight="SemiBold"/>
-                    <Label Content="ID"
-                                       Foreground="White"
-                                       Margin="3,0,0,0"
-                                       Width="35"
-                                       FontWeight="SemiBold"/>
+
                     <Label Content="Name"
                                        Foreground="White"
                                        Margin="25,0,0,0"
@@ -147,7 +143,7 @@
                     <Label Content="Team"
                                        Foreground="White"
                                        Margin="25,0,0,0"
-                                       Width="75"
+                                       Width="95"
                            FontWeight="SemiBold"/>
                     <Label Content="Age"
                                        Foreground="White"
@@ -182,23 +178,19 @@
                                         Margin="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
-                                <Border Background="{Binding TeamLogo}"
+                                <Border Background="{Binding LogoColor}"
                                         CornerRadius="25"
                                         Width="25" Height="25"
                                         Margin="15,0,0,0"/>
-                                <Label Content="{Binding ID}"
+                                <Label Content="{Binding FullName}"
                                        Foreground="White"
                                        Margin="25,0,0,0"
-                                       Width="35"/>
-                                <Label Content="{Binding Name}"
-                                       Foreground="White"
-                                       Margin="25,0,0,0"
-                                       Width="100"/>
-                                <Label Content="{Binding Team}"
+                                       Width="120"/>
+                                <Label Content="{Binding TeamID}"
                                        Foreground="White"
                                        Margin="25,0,0,0"
                                        Width="75"/>
-                                <Label Content="{Binding Age}"
+                                <Label Content="12"
                                        Foreground="White"
                                        Margin="25,0,0,0"
                                        Width="35"/>
@@ -222,7 +214,7 @@
                                                             Background="Transparent"
                                                             MouseDown="PlayerDevelopmentBtn_Click"
                                                             Cursor="Hand"/>
-                                    <iconPacks:PackIconMaterial 
+                                    <iconPacks:PackIconMaterial Tag="{Binding Identifier}"
                                                             Kind="Plus" 
                                                             VerticalAlignment="Center" 
                                                             HorizontalAlignment="Center" 
@@ -506,26 +498,37 @@
                           HorizontalContentAlignment="Center">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal"
+                            <StackPanel Tag="{Binding ID}"
+                                        Orientation="Horizontal"
                                         Margin="1"
                                         HorizontalAlignment="Left"
-                                        VerticalAlignment="Center">
+                                        VerticalAlignment="Center"
+                                        MouseDown="AddPlayerToSquad_Click">
                                 <Border Background="{Binding TeamLogo}"
                                         CornerRadius="25"
-                                        Width="25" Height="25"
+                                        Width="50" Height="50"
                                         Margin="35,0,0,0"/>
                                 <Label Content="{Binding ID}"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="35"/>
+                                       Margin="0,0,0,0"
+                                       Width="90"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       HorizontalContentAlignment="Center"/>
                                 <Label Content="{Binding Name}"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="100"/>
+                                       Margin="0,0,0,0"
+                                       Width="155"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       HorizontalContentAlignment="Center"/>
                                 <Label Content="{Binding PlayersNumber}"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="75"/>
+                                       Margin="0,0,0,0"
+                                       Width="130"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       HorizontalContentAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
 

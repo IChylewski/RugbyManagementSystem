@@ -1,7 +1,10 @@
 ﻿using MahApps.Metro.IconPacks;
 using RugbyManagementSystem.Database.Data;
+using RugbyManagementSystem.Database.Models;
 using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
@@ -12,16 +15,18 @@ namespace RugbyManagementSystem.Windows
     /// </summary>
     public partial class CoachWindow : Window
     {
-        DataContainer dataContainer;
+        MemberModel member;
+        int memberID;
+        string memberType;
 
         public CoachWindow()
         {
             InitializeComponent();
+            DataContainer.UpdatePlayersList();
 
-            dataContainer = new DataContainer();
-            PlayersList.ItemsSource = dataContainer.Players;
-            SquadsList.ItemsSource = dataContainer.Teams;
-            TeamSelection.ItemsSource = dataContainer.Teams;
+            PlayersList.ItemsSource = DataContainer.Players;
+            SquadsList.ItemsSource = DataContainer.Teams;
+            TeamSelection.ItemsSource = DataContainer.Teams;
 
 
         }
@@ -61,6 +66,11 @@ namespace RugbyManagementSystem.Windows
         {
             System.Windows.Application.Current.Shutdown();
         }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
+        }
 
         private void RadioBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -96,7 +106,44 @@ namespace RugbyManagementSystem.Windows
             PlayersBtn.IsChecked = false;
             PlayersView.Visibility = Visibility.Collapsed;
 
+            PackIconMaterial plusButton = sender as PackIconMaterial;
+            object[] identifier = plusButton.Tag as object[];
+            memberID = (int)identifier[0];
+            memberType = (string)identifier[1];
+
             TeamSelectionView.Visibility = Visibility.Visible;
+        }
+        private void AddPlayerToSquad_Click(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel teamButton = sender as StackPanel;
+            int teamID = (int)teamButton.Tag;
+            switch (memberType)
+            {
+                case "Junior Player":
+                    {
+                        DataContainer.dataBase.ChangeJuniorPlayerTeam(memberID, teamID);
+                        DataContainer.UpdateJuniorPlayersList();
+                        DataContainer.UpdateTeamsList();
+                        MessageBox.Show("Success");
+                        break;
+                    }
+                case "Adult Player":
+                    {
+                        DataContainer.dataBase.ChangePlayerTeam(memberID, teamID);
+                        DataContainer.UpdateAdultPlayersList();
+                        DataContainer.UpdateTeamsList();
+                        MessageBox.Show("Success");
+                        break;
+                    }
+            }
+
+            TeamSelectionView.Visibility = Visibility.Collapsed;
+
+            PlayersView.Visibility = Visibility.Visible;
+            PlayersBtn.IsChecked = true;
+
+            DataContainer.UpdatePlayersList();
+            PlayersList.Items.Refresh();
         }
         private void DisplayTeamSquadBtn_Click(object sender, MouseButtonEventArgs e)
         {
