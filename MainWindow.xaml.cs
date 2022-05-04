@@ -24,12 +24,12 @@ namespace RugbyManagementSystem
         public MainWindow()
         {
             InitializeComponent();
-            secWin = new SecretaryWindow();
-            coachWin = new CoachWindow();
+            
+            
 
-            this.Close();
-            coachWin.Show();
-            secWin.Show();
+            //this.Close();
+            //coachWin.Show();
+            //secWin.Show();
 
         }
 
@@ -72,12 +72,14 @@ namespace RugbyManagementSystem
                     case "Coach":
                         {
                             this.Close();
+                            coachWin = new CoachWindow();
                             coachWin.Show();
                             break;
                         }
                     case "Secretary":
                         {
                             this.Close();
+                            secWin = new SecretaryWindow();
                             secWin.Show();
                             break;
                         }

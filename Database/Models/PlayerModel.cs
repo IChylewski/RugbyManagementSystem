@@ -26,23 +26,23 @@ namespace RugbyManagementSystem.Database.Models
         public int GoalKick { get; set; }
 
 
-        public PlayerModel(int id, string firstName, string lastName, string email, string dob, string phoneNumber, string sruNumber, int teamID, string type = "Adult Player") : base (id, firstName, lastName, email, dob, phoneNumber, type)
+        public PlayerModel(int id, string firstName, string lastName, string email, string dob, string phoneNumber, string sruNumber, int teamID,int standardPass,int spinPass, int popPass, int frontTackle, int rearTackle, int sideTackle, int scrabbleTackle, int dropKick, int puntKick, int grubberKick, int goalKick, string type = "Adult Player") : base (id, firstName, lastName, email, dob, phoneNumber, type)
         {
             TeamID = teamID;
             SRUNumber = sruNumber;
 
 
-            StandardPass = 0;
-            SpinPass = 0;
-            PopPass = 0;
-            FrontTackle = 0;
-            RearTackle = 0;
-            SideTackle = 0;
-            ScrabbleTackle = 0;
-            DropKick = 0;
-            PuntKick = 0;
-            GrubberKick = 0;
-            GoalKick = 0;
+            StandardPass = standardPass;
+            SpinPass = spinPass;
+            PopPass = popPass;
+            FrontTackle = frontTackle;
+            RearTackle = rearTackle;
+            SideTackle = sideTackle;
+            ScrabbleTackle = scrabbleTackle;
+            DropKick = dropKick;
+            PuntKick = puntKick;
+            GrubberKick = grubberKick;
+            GoalKick = goalKick;
 
             OverallSkill = (StandardPass +
                             SpinPass +
@@ -80,6 +80,7 @@ namespace RugbyManagementSystem.Database.Models
                 if(TeamID == x.ID)
                 {
                     TeamName = x.Name;
+                    break;
                 }
                 else
                 {

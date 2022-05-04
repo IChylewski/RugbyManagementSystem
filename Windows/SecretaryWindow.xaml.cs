@@ -27,6 +27,7 @@ namespace RugbyManagementSystem.Windows
         {
             InitializeComponent();
             DataContainer.UpdateMembersList();
+           
 
             MembersList.ItemsSource = DataContainer.Members;
             TeamsList.ItemsSource = DataContainer.Teams;
@@ -864,6 +865,8 @@ namespace RugbyManagementSystem.Windows
             this.Visibility = Visibility.Hidden;
             e.Cancel = true;
         }
+
+       
     }
 
 }

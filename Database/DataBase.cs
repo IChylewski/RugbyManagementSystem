@@ -29,7 +29,7 @@ namespace RugbyManagementSystem.Database
             //DropTeamsTable();
             //CreateTeamsTable();
 
-            //DropCoachesTable();
+           // DropCoachesTable();
             //CreateCoachesTable();
 
             //DropPlayersTable();
@@ -230,7 +230,7 @@ namespace RugbyManagementSystem.Database
 
             while (reader.Read())
             {
-                PlayersList.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetInt32(7)));
+                PlayersList.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetInt32(7),reader.GetInt32(8), reader.GetInt32(9), reader.GetInt32(10), reader.GetInt32(11), reader.GetInt32(12), reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(15), reader.GetInt32(16), reader.GetInt32(17), reader.GetInt32(18)));
             };
 
 
@@ -246,6 +246,13 @@ namespace RugbyManagementSystem.Database
         public void EditPlayer (int id, string firstName, string lastName, string email, string dob, string phoneNumber,string sruNumber)
         {
             string sql = $"UPDATE Players SET FirstName = '{firstName}', LastName = '{lastName}', Email = '{email}', DOB = '{dob}', PhoneNumber = '{phoneNumber}', SRUNumber = '{sruNumber}' WHERE ID = '{id}'";
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public void EditPlayerDevelopment (int id, int standardPass, int spinPass, int popPass, int frontTackle, int rearTackle, int sideTackle, int scrabbleTackle, int dropKick, int puntKick, int grubberKick,int goalKick)
+        {
+            string sql = $"UPDATE Players SET StandardPass = '{standardPass}', SpinPass = '{spinPass}', PopPass = '{popPass}', FrontTackle = '{frontTackle}', RearTackle = '{rearTackle}', SideTackle = '{sideTackle}', ScrabbleTackle = '{scrabbleTackle}', DropKick = '{dropKick}', PuntKick = '{puntKick}', GrubberKick = '{grubberKick}', GoalKick = '{goalKick}' WHERE ID = '{id}'";
 
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
@@ -291,7 +298,7 @@ namespace RugbyManagementSystem.Database
 
             while (reader.Read())
             {
-                JuniorPlayersList.Add(new JuniorPlayerModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetInt32(8)));
+                JuniorPlayersList.Add(new JuniorPlayerModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetInt32(8), reader.GetInt32(9), reader.GetInt32(10), reader.GetInt32(11), reader.GetInt32(12), reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(15), reader.GetInt32(16), reader.GetInt32(17), reader.GetInt32(18), reader.GetInt32(19)));
             };
 
             return JuniorPlayersList;
@@ -306,6 +313,13 @@ namespace RugbyManagementSystem.Database
         public void EditJuniorPlayer(int id, string firstName, string lastName, string email, string dob, string phoneNumber, string sruNumber,string consent)
         {
             string sql = $"UPDATE JuniorPlayers SET FirstName = '{firstName}', LastName = '{lastName}', Email = '{email}', DOB = '{dob}', PhoneNumber = '{phoneNumber}', SRUNumber = '{sruNumber}', Consent = '{consent}' WHERE ID = '{id}'";
+
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+        }
+        public void EditJuniorPlayerDevelopment(int id, int standardPass, int spinPass, int popPass, int frontTackle, int rearTackle, int sideTackle, int scrabbleTackle, int dropKick, int puntKick, int grubberKick, int goalKick)
+        {
+            string sql = $"UPDATE JuniorPlayers SET StandardPass = '{standardPass}', SpinPass = '{spinPass}', PopPass = '{popPass}', FrontTackle = '{frontTackle}', RearTackle = '{rearTackle}', SideTackle = '{sideTackle}', ScrabbleTackle = '{scrabbleTackle}', DropKick = '{dropKick}', PuntKick = '{puntKick}', GrubberKick = '{grubberKick}', GoalKick = '{goalKick}' WHERE ID = '{id}'";
 
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();

@@ -91,6 +91,7 @@
                              Foreground="White"
                              FontSize="18"
                              FontWeight="Bold"
+                             Click="LogOutBtn_Click"
                              Style="{StaticResource MenuButtonTheme}"/>
             </StackPanel>
 
@@ -186,7 +187,7 @@
                                        Foreground="White"
                                        Margin="25,0,0,0"
                                        Width="120"/>
-                                <Label Content="{Binding TeamID}"
+                                <Label Content="{Binding TeamName}"
                                        Foreground="White"
                                        Margin="25,0,0,0"
                                        Width="75"/>
@@ -205,7 +206,7 @@
                                 <StackPanel Orientation="Horizontal"
                                             Margin="25,0,0,0"
                                             Width="100">
-                                    <iconPacks:PackIconMaterial 
+                                    <iconPacks:PackIconMaterial Tag="{Binding Identifier}"
                                                             Kind="Football" 
                                                             VerticalAlignment="Center" 
                                                             HorizontalAlignment="Center" 
@@ -316,6 +317,7 @@
                                             Margin="55,0,0,0"
                                             Width="100">
                                     <iconPacks:PackIconMaterial 
+                                                            Tag="{Binding ID}"
                                                             Kind="AccountMultiple" 
                                                             VerticalAlignment="Center" 
                                                             HorizontalAlignment="Center" 
@@ -337,7 +339,8 @@
                         Grid.Column="1"
                         Grid.Row="2"
                         Visibility="Collapsed">
-                <Label Content="Player Name"
+                <Label Name="PlayerNameBlock"
+                        Content="{Binding FullName}"
                        Foreground="White"
                        FontSize="30"
                        FontFamily="Fonts/#Dosis"
@@ -450,6 +453,7 @@
                 <Button Name="SaveBtn"
                             Content="Save"
                             Foreground="White"
+                        Click="EditPlayerDevelopmentBtn_Click"
                             Style="{StaticResource ModernLoginButton}"/>
             </StackPanel>
             <StackPanel Name="TeamSelectionView"
@@ -568,15 +572,10 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="1,5,1,5"
                             HorizontalAlignment="Left">
-                    <Label Content="Logo"
+                    <Label Content=""
                                        Foreground="White"
                                        Margin="35,0,0,0"
                                        Width="50"
-                                       FontWeight="SemiBold"/>
-                    <Label Content="ID"
-                                       Foreground="White"
-                                       Margin="33,0,0,0"
-                                       Width="35"
                                        FontWeight="SemiBold"/>
                     <Label Content="Name"
                                        Foreground="White"
@@ -585,17 +584,17 @@
                                        FontWeight="SemiBold"/>
                     <Label Content="Age"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
+                                       Margin="75,0,0,0"
                                        Width="35"
                            FontWeight="SemiBold"/>
                     <Label Content="Skill"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
+                                       Margin="75,0,0,0"
                                        Width="35"
                            FontWeight="SemiBold"/>
                     <Label Content="Action"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
+                                       Margin="75,0,0,0"
                                        Width="100"
                            FontWeight="SemiBold"/>
                 </StackPanel>
@@ -608,52 +607,42 @@
                                         Margin="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
-                                <Border Background="{Binding TeamLogo}"
+                                <Border Background="{Binding LogoColor}"
                                         CornerRadius="25"
                                         Width="25" Height="25"
                                         Margin="35,0,0,0"/>
-                                <Label Content="{Binding ID}"
+                                <Label Content="{Binding FullName}"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="35"/>
-                                <Label Content="{Binding Name}"
-                                       Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="100"/>
-                                <Label Content="{Binding Team}"
-                                       Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="75"/>
+                                       Margin="75,0,0,0"
+                                       Width="125"/>
                                 <Label Content="{Binding Age}"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
+                                       Margin="75,0,0,0"
                                        Width="35"/>
-                                <Label Content="{Binding Type}"
-                                       Foreground="White"
-                                       Margin="55,0,0,0"
-                                       Width="75"/>
                                 <Label Content="{Binding OverallSkill}"
                                        Foreground="White"
-                                       Margin="55,0,0,0"
+                                       Margin="75,0,0,0"
                                        Width="35"/>
                                 <StackPanel Orientation="Horizontal"
-                                            Margin="25,0,0,0"
+                                            Margin="45,0,0,0"
                                             Width="100">
-                                    <iconPacks:PackIconMaterial 
+                                    <iconPacks:PackIconMaterial Tag="{Binding Identifier}"
                                                             Kind="Football" 
                                                             VerticalAlignment="Center" 
                                                             HorizontalAlignment="Center" 
                                                             Foreground="White"
                                                             Margin="5,0,5,0"
                                                             Background="Transparent"
+                                                                MouseDown="PlayerDevelopmentBtn_Click"
                                                             Cursor="Hand"/>
-                                    <iconPacks:PackIconMaterial 
+                                    <iconPacks:PackIconMaterial Tag="{Binding Identifier}"
                                                             Kind="Minus" 
                                                             VerticalAlignment="Center" 
                                                             HorizontalAlignment="Center" 
                                                             Foreground="White"
                                                             Margin="5,0,5,0"
                                                             Background="Transparent"
+                                                            MouseDown="RemovePlayerFromSquad_Click"
                                                             Cursor="Hand"/>
                                 </StackPanel>
 

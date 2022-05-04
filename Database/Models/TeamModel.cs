@@ -36,12 +36,13 @@ namespace RugbyManagementSystem.Database.Models
 
         public void FindPlayers()
         {
+            PlayersList.Clear();
             foreach(PlayerModel player in DataContainer.Players)
             {
                 if(player.TeamID == ID)
                 {
                     PlayersList.Add(player);
-                    MessageBox.Show("Found Player2");
+                    //MessageBox.Show("Found Player2");
                 }
             }
             PlayersNumber = PlayersList.Count;

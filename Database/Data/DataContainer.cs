@@ -39,10 +39,12 @@ namespace RugbyManagementSystem.Database.Data
             Players.Clear();
             foreach (PlayerModel y in AdultPlayers)
             {
+                y.FindTeamName();
                 Players.Add(y);
             }
             foreach (PlayerModel x in JuniorPlayers)
             {
+                x.FindTeamName();
                 Players.Add(x);
             }   
         }
@@ -58,11 +60,13 @@ namespace RugbyManagementSystem.Database.Data
         }
         public static void UpdateCoachesList()
         {
+            Coaches.Clear();
             Coaches = dataBase.SelectFromCoachesTable();
         }
         public static void UpdateTeamsList()
         {
             Teams.Clear();
+            //Teams = dataBase.SelectFromTeamsTable();
             foreach(TeamModel x in dataBase.SelectFromTeamsTable())
             {
                 Teams.Add(x);
