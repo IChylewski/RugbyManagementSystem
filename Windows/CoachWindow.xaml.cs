@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.IconPacks;
+using RugbyManagementSystem.Database;
 using RugbyManagementSystem.Database.Data;
 using RugbyManagementSystem.Database.Models;
 using System;
@@ -182,52 +183,50 @@ namespace RugbyManagementSystem.Windows
         {
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
-
-            if (PassingStandardBox.Text == "")
+            if (CustomValidation.ValidateSkill("Standard Passing", PassingStandardBox.Text) == false)
             {
                 validation = false;
             }
-            else if (PassingSpinBox.Text == "")
+            else if(CustomValidation.ValidateSkill("Spin Passing", PassingSpinBox.Text) == false)
             {
                 validation = false;
             }
-            else if (PassingPopBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Pop Passing", PassingPopBox.Text) == false)
             {
                 validation = false;
             }
-            else if (TacklingFrontBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Front Tackling", TacklingFrontBox.Text) == false)
             {
                 validation = false;
             }
-            else if (TacklingRearBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Rear Tackling", TacklingRearBox.Text) == false)
             {
                 validation = false;
             }
-            else if (TacklingSideBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Side Tackling", TacklingSideBox.Text) == false)
             {
                 validation = false;
             }
-            else if (TacklingScrabbleBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Scrabble Tackling", TacklingScrabbleBox.Text) == false)
             {
                 validation = false;
             }
-            else if (KickingDropBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Drop Kicking", KickingDropBox.Text) == false)
             {
                 validation = false;
             }
-            else if (KickingPuntBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Punt Kicking", KickingPuntBox.Text) == false)
             {
                 validation = false;
             }
-            else if (KickingGrubberBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Grubber Kicking", KickingGrubberBox.Text) == false)
             {
                 validation = false;
             }
-            else if (KickingGoalBox.Text == "")
+            else if (CustomValidation.ValidateSkill("Goal Kicking", KickingGoalBox.Text) == false)
             {
                 validation = false;
             }
-
 
 
             if (validation == true)
@@ -237,7 +236,7 @@ namespace RugbyManagementSystem.Windows
                 {
                     case "Junior Player":
                         {
-                            DataContainer.dataBase.EditJuniorPlayerDevelopment(1, Int32.Parse(PassingStandardBox.Text), Int32.Parse(PassingSpinBox.Text), Int32.Parse(PassingPopBox.Text), Int32.Parse(TacklingFrontBox.Text), Int32.Parse(TacklingRearBox.Text), Int32.Parse(TacklingSideBox.Text), Int32.Parse(TacklingScrabbleBox.Text), Int32.Parse(KickingDropBox.Text), Int32.Parse(KickingPuntBox.Text), Int32.Parse(KickingGrubberBox.Text), Int32.Parse(KickingGoalBox.Text));
+                            DataContainer.dataBase.EditJuniorPlayerDevelopment(juniorPlayer.ID, Int32.Parse(PassingStandardBox.Text), Int32.Parse(PassingSpinBox.Text), Int32.Parse(PassingPopBox.Text), Int32.Parse(TacklingFrontBox.Text), Int32.Parse(TacklingRearBox.Text), Int32.Parse(TacklingSideBox.Text), Int32.Parse(TacklingScrabbleBox.Text), Int32.Parse(KickingDropBox.Text), Int32.Parse(KickingPuntBox.Text), Int32.Parse(KickingGrubberBox.Text), Int32.Parse(KickingGoalBox.Text));
                             DataContainer.UpdateJuniorPlayersList();
                             break;
                         }
@@ -259,10 +258,6 @@ namespace RugbyManagementSystem.Windows
 
                 PlayersBtn.IsChecked = true;
                 PlayersView.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Credentials");
             }
         }
         private void AddPlayerToTeamBtn_Click(object sender, MouseButtonEventArgs e)
@@ -357,8 +352,6 @@ namespace RugbyManagementSystem.Windows
 
             PackIconMaterial btn = sender as PackIconMaterial;
 
-            //TeamModel team = new TeamModel(0, "test"); ;
-
             foreach (TeamModel x in DataContainer.Teams)
             {
                 if ((int)btn.Tag == x.ID)
@@ -366,9 +359,6 @@ namespace RugbyManagementSystem.Windows
                     team = x;
                 }
             }
-
-
-
             TeamSquadList.ItemsSource = team.PlayersList;
 
             TeamSquadView.Visibility = Visibility.Visible;

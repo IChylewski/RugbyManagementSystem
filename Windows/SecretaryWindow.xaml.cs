@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.IconPacks;
+using RugbyManagementSystem.Database;
 using RugbyManagementSystem.Database.Data;
 using RugbyManagementSystem.Database.Models;
 using System;
@@ -27,7 +28,7 @@ namespace RugbyManagementSystem.Windows
         {
             InitializeComponent();
             DataContainer.UpdateMembersList();
-           
+
 
             MembersList.ItemsSource = DataContainer.Members;
             TeamsList.ItemsSource = DataContainer.Teams;
@@ -333,106 +334,108 @@ namespace RugbyManagementSystem.Windows
 
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
-            ComboBoxItem typeCbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
 
-            switch (typeCbi.Content.ToString())
+            ComboBoxItem typeCbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
+            if(typeCbi != null)
             {
-                case "Coach":
-                    {
-                        if (TypeChoiceBox.SelectedItem == null)
+                switch (typeCbi.Content.ToString())
+                {
+                    case "Coach":
                         {
-                            validation = false;
+                            if (CustomValidation.ValidateName("First Name", FirstNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateName("Last Name", LastNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateEmail("Email", EmailBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (DOBPicker.SelectedDate == null)
+                            {
+                                validation = false;
+
+                                MessageBox.Show("Date Of Birth Cannot be empty");
+                            }
+                            else if (CustomValidation.ValidatePhoneNumber("Phone Number", PhoneNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            break;
                         }
-                        else if (FirstNameBox.Text == "")
+                    case "Adult Player":
                         {
-                            validation = false;
+                            if (CustomValidation.ValidateName("First Name", FirstNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateName("Last Name", LastNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateEmail("Email", EmailBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (DOBPicker.SelectedDate == null)
+                            {
+                                validation = false;
+
+                                MessageBox.Show("Date Of Birth Cannot be empty");
+                            }
+                            else if (CustomValidation.ValidatePhoneNumber("Phone Number", PhoneNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateSRUNumber("SRU Number", SRUNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            break;
                         }
-                        else if (LastNameBox.Text == "")
+                    case "Junior Player":
                         {
-                            validation = false;
+                            if (CustomValidation.ValidateName("First Name", FirstNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateName("Last Name", LastNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateEmail("Email", EmailBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (DOBPicker.SelectedDate == null)
+                            {
+                                validation = false;
+
+                                MessageBox.Show("Date Of Birth Cannot be empty");
+                            }
+                            else if (CustomValidation.ValidatePhoneNumber("Phone Number", PhoneNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateSRUNumber("SRU Number", SRUNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateChoiceBox("Consent", ConsentChoiceBox.SelectedItem) == false)
+                            {
+                                validation = false;
+                            }
+                            break;
                         }
-                        else if (EmailBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (DOBPicker.SelectedDate == null)
-                        {
-                            validation = false;
-                        }
-                        else if (PhoneNumberBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        break;
-                    }
-                case "Adult Player":
-                    {
-                        if (TypeChoiceBox.SelectedItem == null)
-                        {
-                            validation = false;
-                        }
-                        else if (FirstNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (LastNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EmailBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (DOBPicker.SelectedDate == null)
-                        {
-                            validation = false;
-                        }
-                        else if (PhoneNumberBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (SRUNumberBox.Text == "" && PlayerOnlyPanel.Visibility == Visibility.Visible)
-                        {
-                            validation = false;
-                        }
-                        break;
-                    }
-                case "Junior Player":
-                    {
-                        if (TypeChoiceBox.SelectedItem == null)
-                        {
-                            validation = false;
-                        }
-                        else if (FirstNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (LastNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EmailBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (DOBPicker.SelectedDate == null)
-                        {
-                            validation = false;
-                        }
-                        else if (PhoneNumberBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (SRUNumberBox.Text == "" && PlayerOnlyPanel.Visibility == Visibility.Visible)
-                        {
-                            validation = false;
-                        }
-                        else if (ConsentChoiceBox.SelectedItem == null && ConsentPanel.Visibility == Visibility.Visible)
-                        {
-                            validation = false;
-                        }
-                        break;
-                    }
+                }
+            }
+            else
+            {
+                validation = false;
+                MessageBox.Show("Choose Type");
             }
 
 
@@ -441,6 +444,7 @@ namespace RugbyManagementSystem.Windows
                 string typeString = typeCbi.Content.ToString();
 
                 DateTime selectedDate = (DateTime)DOBPicker.SelectedDate;
+
                 string DOB = selectedDate.ToString("dd/MM/yyyy");
 
                 ComboBoxItem consentCbi;
@@ -474,10 +478,6 @@ namespace RugbyManagementSystem.Windows
                 MessageBox.Show("Success");
                 FinishCreatingMember();
             }
-            else
-            {
-                MessageBox.Show("Incorrect Credentials");
-            }
         }
         private void FinishCreatingMember()
         {
@@ -508,107 +508,107 @@ namespace RugbyManagementSystem.Windows
 
             ComboBoxItem typeCbi = EditTypeChoiceBox.SelectedItem as ComboBoxItem;
 
-            switch (typeCbi.Content.ToString())
+            if (typeCbi != null)
             {
-                case "Coach":
-                    {
-                        if (EditTypeChoiceBox.SelectedItem == null)
+                switch (typeCbi.Content.ToString())
+                {
+                    case "Coach":
                         {
-                            validation = false;
+                            if (CustomValidation.ValidateName("First Name", EditFirstNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateName("Last Name", EditLastNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateEmail("Email", EditEmailBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (EditDOBPicker.SelectedDate == null)
+                            {
+                                validation = false;
+
+                                MessageBox.Show("Date Of Birth Cannot be empty");
+                            }
+                            else if(CustomValidation.ValidatePhoneNumber("Phone Number", EditPhoneNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            break;
                         }
-                        else if (EditFirstNameBox.Text == "")
+                    case "Adult Player":
                         {
-                            validation = false;
+                            if (CustomValidation.ValidateName("First Name", EditFirstNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateName("Last Name", EditLastNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateEmail("Email", EditEmailBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (EditDOBPicker.SelectedDate == null)
+                            {
+                                validation = false;
+
+                                MessageBox.Show("Date Of Birth Cannot be empty");
+                            }
+                            else if (CustomValidation.ValidatePhoneNumber("Phone Number", EditPhoneNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateSRUNumber("SRU Number", EditSRUNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            break;
                         }
-                        else if (EditLastNameBox.Text == "")
+                    case "Junior Player":
                         {
-                            validation = false;
+                            if (CustomValidation.ValidateName("First Name", EditFirstNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateName("Last Name", EditLastNameBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateEmail("Email", EditEmailBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (EditDOBPicker.SelectedDate == null)
+                            {
+                                validation = false;
+
+                                MessageBox.Show("Date Of Birth Cannot be empty");
+                            }
+                            else if (CustomValidation.ValidatePhoneNumber("Phone Number", EditPhoneNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateSRUNumber("SRU Number", EditSRUNumberBox.Text) == false)
+                            {
+                                validation = false;
+                            }
+                            else if (CustomValidation.ValidateChoiceBox("Consent", EditConsentChoiceBox.SelectedItem) == false)
+                            {
+                                validation = false;
+                            }
+                            break;
                         }
-                        else if (EditEmailBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditDOBPicker.SelectedDate == null)
-                        {
-                            validation = false;
-                        }
-                        else if (EditPhoneNumberBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        break;
-                    }
-                case "Adult Player":
-                    {
-                        if (EditTypeChoiceBox.SelectedItem == null)
-                        {
-                            validation = false;
-                        }
-                        else if (EditFirstNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditLastNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditEmailBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditDOBPicker.SelectedDate == null)
-                        {
-                            validation = false;
-                        }
-                        else if (EditPhoneNumberBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditSRUNumberBox.Text == "" && EditPlayerOnlyPanel.Visibility == Visibility.Visible)
-                        {
-                            validation = false;
-                        }
-                        break;
-                    }
-                case "Junior Player":
-                    {
-                        if (EditTypeChoiceBox.SelectedItem == null)
-                        {
-                            validation = false;
-                        }
-                        else if (EditFirstNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditLastNameBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditEmailBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditDOBPicker.SelectedDate == null)
-                        {
-                            validation = false;
-                        }
-                        else if (EditPhoneNumberBox.Text == "")
-                        {
-                            validation = false;
-                        }
-                        else if (EditSRUNumberBox.Text == "" && EditPlayerOnlyPanel.Visibility == Visibility.Visible)
-                        {
-                            validation = false;
-                        }
-                        else if (EditConsentChoiceBox.SelectedItem == null && EditConsentPanel.Visibility == Visibility.Visible)
-                        {
-                            validation = false;
-                        }
-                        break;
-                    }
+                }
             }
-
-
+            else
+            {
+                validation = false;
+                MessageBox.Show("Choose Type");
+            }
             if (validation == true)
             {
                 string typeString = typeCbi.Content.ToString();
@@ -646,10 +646,6 @@ namespace RugbyManagementSystem.Windows
 
                 MessageBox.Show("Success");
                 FinishEditingMember();
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Credentials");
             }
 
         }
@@ -866,7 +862,7 @@ namespace RugbyManagementSystem.Windows
             e.Cancel = true;
         }
 
-       
+
     }
 
 }
