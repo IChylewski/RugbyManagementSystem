@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RugbyManagementSystem.Database.Models
 {
+    // Class that is inherited from Player Model the only difference is that this class has additional Consent Field and Type field set on default
     public class JuniorPlayerModel : PlayerModel
     {
         public string Consent { get; set; }

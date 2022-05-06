@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RugbyManagementSystem.Database.Models
 {
+    // Stores all nesseccary data for user
     public class UserModel
     {
         public int ID { get; set; }

@@ -29,6 +29,7 @@ namespace RugbyManagementSystem.Windows
             InitializeComponent();
             DataContainer.UpdateMembersList();
 
+            // Sets item sources of ListViews
 
             MembersList.ItemsSource = DataContainer.Members;
             TeamsList.ItemsSource = DataContainer.Teams;
@@ -42,18 +43,18 @@ namespace RugbyManagementSystem.Windows
         // Methods
 
         // These methods are event handlers for window operations
-        private void Border_MouseDown(Object sender, MouseButtonEventArgs e)
+        private void Border_MouseDown(Object sender, MouseButtonEventArgs e)   // When left mouse button is pressed on the border which is window background - window can be dragged
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
         }
-        private void ButtonMinimize_Click(Object sender, MouseButtonEventArgs e)
+        private void ButtonMinimize_Click(Object sender, MouseButtonEventArgs e)        // On click minimize window
         {
             this.WindowState = WindowState.Minimized;
         }
-        private void ButtonMaximize_Click(Object sender, MouseButtonEventArgs e)
+        private void ButtonMaximize_Click(Object sender, MouseButtonEventArgs e)        // On click window is maximazed and button icon and its event handler changed
         {
             PackIconMaterial maximizeIcon = sender as PackIconMaterial;
             this.WindowState = WindowState.Maximized;
@@ -62,7 +63,7 @@ namespace RugbyManagementSystem.Windows
             maximizeIcon.MouseDown -= ButtonMaximize_Click;
             maximizeIcon.MouseDown += ButtonRestore_Click;
         }
-        private void ButtonRestore_Click(Object sender, MouseButtonEventArgs e)
+        private void ButtonRestore_Click(Object sender, MouseButtonEventArgs e)      // On click window is restored to its previous state and button icon and its event handler changed
         {
             PackIconMaterial restoreIcon = sender as PackIconMaterial;
             this.WindowState = WindowState.Normal;
@@ -71,13 +72,13 @@ namespace RugbyManagementSystem.Windows
             restoreIcon.MouseDown -= ButtonRestore_Click;
             restoreIcon.MouseDown += ButtonMaximize_Click;
         }
-        private void ButtonExit_Click(Object sender, MouseButtonEventArgs e)
+        private void ButtonExit_Click(Object sender, MouseButtonEventArgs e)        // On click exit application
         {
             System.Windows.Application.Current.Shutdown();
         }
         // These methods are event handlers for changing views
-        private void RadioBtn_Click(object sender, RoutedEventArgs e)
-        {
+        private void RadioBtn_Click(object sender, RoutedEventArgs e)      // Event handler for all left panel menu buttons 
+        {                                                                   // Changes views on click
             if (MembersBtn.IsChecked == true)
             {
                 MembersView.Visibility = Visibility.Visible;
@@ -119,14 +120,14 @@ namespace RugbyManagementSystem.Windows
                 EditTeamView.Visibility = Visibility.Collapsed;
             }
         }
-        private void AddMemberBtn_Click(object sender, MouseButtonEventArgs e)
+        private void AddMemberBtn_Click(object sender, MouseButtonEventArgs e)  // Changes view to AddMember View
         {
             MembersBtn.IsChecked = false;
 
             AddNewMemberView.Visibility = Visibility.Visible;
             MembersView.Visibility = Visibility.Collapsed;
         }
-        private void EditMemberBtn_Click(object sender, MouseButtonEventArgs e)
+        private void EditMemberBtn_Click(object sender, MouseButtonEventArgs e)      // Changes view to EditMemberView and populate boxes with specific player data
         {
 
             // Changes to view to Edit Member View
@@ -143,11 +144,11 @@ namespace RugbyManagementSystem.Windows
             //Finds user with ID that is as same as ID in the button Tag property
 
 
-            switch (memberType)
+            switch (memberType)       // Determines type of member that is about to be edited
             {
                 case "Coach":
                     {
-                        foreach (CoachModel x in DataContainer.Coaches)
+                        foreach (CoachModel x in DataContainer.Coaches)     // Find member in specific list 
                         {
                             if (x.ID == memberID)
                             {
@@ -245,14 +246,14 @@ namespace RugbyManagementSystem.Windows
                 }
             }
         }
-        private void AddNewTeamBtn_Click(object sender, MouseButtonEventArgs e)
+        private void AddNewTeamBtn_Click(object sender, MouseButtonEventArgs e)   // Change view to AddTeamView
         {
             TeamsView.Visibility = Visibility.Collapsed;
             TeamsBtn.IsChecked = false;
 
             AddNewTeamView.Visibility = Visibility.Visible;
         }
-        private void EditTeamBtn_Click(object sender, MouseButtonEventArgs e)
+        private void EditTeamBtn_Click(object sender, MouseButtonEventArgs e)   // Change view to EditTeamView and populate boxes with teams' data
         {
             TeamsView.Visibility = Visibility.Collapsed;
             TeamsBtn.IsChecked = false;
@@ -274,7 +275,7 @@ namespace RugbyManagementSystem.Windows
 
             EditTeamNameBox.Text = team.Name;
         }
-        private void TypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
+        private void TypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)     // Event handler for changing box item
         {
             ComboBoxItem cbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
 
@@ -301,7 +302,7 @@ namespace RugbyManagementSystem.Windows
 
 
         }
-        private void EditTypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)
+        private void EditTypeChoiceBox_Change(object sender, SelectionChangedEventArgs e)      // Event handler for EditTypeChoiceBox
         {
             ComboBoxItem cbi = EditTypeChoiceBox.SelectedItem as ComboBoxItem;
 
@@ -329,20 +330,20 @@ namespace RugbyManagementSystem.Windows
 
 
         }
-        private void CreateMemberBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateMemberBtn_Click(object sender, RoutedEventArgs e)         // Event handler for CreateMember button
         {
 
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
 
             ComboBoxItem typeCbi = TypeChoiceBox.SelectedItem as ComboBoxItem;
-            if(typeCbi != null)
+            if(typeCbi != null)                     // checks if type has been chosen if not validation false
             {
                 switch (typeCbi.Content.ToString())
                 {
-                    case "Coach":
+                    case "Coach":          // determines which type has been chosen
                         {
-                            if (CustomValidation.ValidateName("First Name", FirstNameBox.Text) == false)
+                            if (CustomValidation.ValidateName("First Name", FirstNameBox.Text) == false)            // Uses CustomValidation class that helps with validaiton
                             {
                                 validation = false;
                             }
@@ -439,18 +440,18 @@ namespace RugbyManagementSystem.Windows
             }
 
 
-            if (validation == true)
+            if (validation == true)                                       // checks if validation process was successful
             {
                 string typeString = typeCbi.Content.ToString();
 
                 DateTime selectedDate = (DateTime)DOBPicker.SelectedDate;
 
-                string DOB = selectedDate.ToString("dd/MM/yyyy");
+                string DOB = selectedDate.ToString("dd/MM/yyyy");          // changes DateTime to string so it can be passed to database easier
 
                 ComboBoxItem consentCbi;
                 string consent;
 
-                switch (typeString)
+                switch (typeString)              // checks type of user that is about to be added to check which table should be populated
                 {
                     case "Coach":
                         {
@@ -479,7 +480,7 @@ namespace RugbyManagementSystem.Windows
                 FinishCreatingMember();
             }
         }
-        private void FinishCreatingMember()
+        private void FinishCreatingMember()                  // Restores all values to default
         {
             TypeChoiceBox.SelectedItem = null;
             FirstNameBox.Text = "";
@@ -502,17 +503,17 @@ namespace RugbyManagementSystem.Windows
 
         }
 
-        private void EditMemberDetailsBtn_Click(object sender, RoutedEventArgs e)
+        private void EditMemberDetailsBtn_Click(object sender, RoutedEventArgs e)        // Event handler for edit button 
         {
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
             ComboBoxItem typeCbi = EditTypeChoiceBox.SelectedItem as ComboBoxItem;
 
-            if (typeCbi != null)
+            if (typeCbi != null)       // checks if type hsa been chosen to eliminate errors
             {
                 switch (typeCbi.Content.ToString())
                 {
-                    case "Coach":
+                    case "Coach":           // checks what is type of edited user to check which fields should be checked
                         {
                             if (CustomValidation.ValidateName("First Name", EditFirstNameBox.Text) == false)
                             {
@@ -609,7 +610,7 @@ namespace RugbyManagementSystem.Windows
                 validation = false;
                 MessageBox.Show("Choose Type");
             }
-            if (validation == true)
+            if (validation == true)              // if validation sucessfull starts process of updating table
             {
                 string typeString = typeCbi.Content.ToString();
 
@@ -619,7 +620,7 @@ namespace RugbyManagementSystem.Windows
                 ComboBoxItem consentCbi;
                 string consent;
 
-                switch (typeString)
+                switch (typeString)         // checks type of edited user to determine which table should be updated
                 {
                     case "Coach":
                         {
@@ -649,7 +650,7 @@ namespace RugbyManagementSystem.Windows
             }
 
         }
-        private void FinishEditingMember()
+        private void FinishEditingMember()     // Restores all values to default
         {
             EditTypeChoiceBox.SelectedItem = null;
             EditFirstNameBox.Text = "";
@@ -671,7 +672,7 @@ namespace RugbyManagementSystem.Windows
 
         }
 
-        private void DeleteMemberBtn_Click(object sender, MouseButtonEventArgs e)
+        private void DeleteMemberBtn_Click(object sender, MouseButtonEventArgs e)       // Event handler for DeleteMemberBtn
         {
             // Gets clicked button and its Tag that is binded to user ID
             PackIconMaterial editButton = sender as PackIconMaterial;
@@ -682,7 +683,7 @@ namespace RugbyManagementSystem.Windows
             //Finds user with ID that is as same as ID in the button Tag property
 
 
-            switch (memberType)
+            switch (memberType)  // checks type of user that is about to be deleted to check which table should be updated
             {
                 case "Coach":
                     {
@@ -705,12 +706,12 @@ namespace RugbyManagementSystem.Windows
             }
 
             MessageBox.Show("Success");
-            DataContainer.UpdateMembersList();
+            DataContainer.UpdateMembersList();          // Refreshes all lists so change can be visible immediately 
             MembersList.Items.Refresh();
             EmailsList.Items.Refresh();
         }
 
-        private void CreateTeamBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateTeamBtn_Click(object sender, RoutedEventArgs e)  // Event handler for CreateTeamBtn
         {
 
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
@@ -720,7 +721,7 @@ namespace RugbyManagementSystem.Windows
                 validation = false;
             }
 
-            if (validation == true)
+            if (validation == true)                 // if validation successful add new team to table
             {
                 DataContainer.dataBase.AddNewTeam(TeamNameBox.Text);
 
@@ -732,7 +733,7 @@ namespace RugbyManagementSystem.Windows
                 MessageBox.Show("Incorrect Credentials");
             }
         }
-        private void FinishCreatingTeam()
+        private void FinishCreatingTeam()          // Restores all values to default
         {
             TeamNameBox.Text = "";
 
@@ -746,7 +747,7 @@ namespace RugbyManagementSystem.Windows
 
         }
 
-        private void EditTeamDetailsBtn_Click(object sender, RoutedEventArgs e)
+        private void EditTeamDetailsBtn_Click(object sender, RoutedEventArgs e)  // Event handler for EditTeamDetailsBtn
         {
             bool validation = true;                     // flag that indicates if validation proceess was succesfull
 
@@ -755,7 +756,7 @@ namespace RugbyManagementSystem.Windows
                 validation = false;
             }
 
-            if (validation == true)
+            if (validation == true)                // if validation successful update record in team table
             {
                 DataContainer.dataBase.EditTeam(team.ID, EditTeamNameBox.Text);
 
@@ -767,7 +768,7 @@ namespace RugbyManagementSystem.Windows
                 MessageBox.Show("Incorrect Credentials");
             }
         }
-        private void FinishEditingTeam()
+        private void FinishEditingTeam()       // Restores all values to default
         {
             EditTeamNameBox.Text = "";
 
@@ -780,21 +781,20 @@ namespace RugbyManagementSystem.Windows
             TeamsView.Visibility = Visibility.Visible;
 
         }
-        private void DeleteTeamBtn_Click(object sender, MouseButtonEventArgs e)
+        private void DeleteTeamBtn_Click(object sender, MouseButtonEventArgs e)        // Event handler for DeleteTeamBtn
         {
             // Gets clicked button and its Tag that is binded to user ID
             PackIconMaterial deleteButton = sender as PackIconMaterial;
-            int teamID = (int)deleteButton.Tag;
+            int teamID = (int)deleteButton.Tag;                  // Gets team id on click
 
-            DataContainer.dataBase.DeleteTeam(teamID);
+            DataContainer.dataBase.DeleteTeam(teamID);        // deletes team using id 
 
             DataContainer.UpdateTeamsList();
             TeamsList.Items.Refresh();
             MessageBox.Show("Success");
         }
-        private void CopyToClipBoardBtn_Click(object sender, MouseButtonEventArgs e)
+        private void CopyToClipBoardBtn_Click(object sender, MouseButtonEventArgs e)    // Event handler for copying email
         {
-            // Gets clicked button and its Tag that is binded to user ID
             // Gets clicked button and its Tag that is binded to user ID
             PackIconMaterial editButton = sender as PackIconMaterial;
             object[] identifier = editButton.Tag as object[];
@@ -804,7 +804,7 @@ namespace RugbyManagementSystem.Windows
             //Finds user with ID that is as same as ID in the button Tag property
 
 
-            switch (memberType)
+            switch (memberType)  
             {
                 case "Coach":
                     {
@@ -850,13 +850,13 @@ namespace RugbyManagementSystem.Windows
 
             }
         }
-        private void LogOutBtn_Click(object sender, RoutedEventArgs e)
+        private void LogOutBtn_Click(object sender, RoutedEventArgs e)   // Event handler for Log Out radio button
         {
             Window mainWindow = new MainWindow();
             this.Close();
             mainWindow.Show();
         }
-        protected override void OnClosing(CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)      // Closing window method must have been changed so it could be opened again after closing
         {
             this.Visibility = Visibility.Hidden;
             e.Cancel = true;

@@ -44,7 +44,7 @@ namespace RugbyManagementSystem.Database.Models
             GrubberKick = grubberKick;
             GoalKick = goalKick;
 
-            OverallSkill = (StandardPass +
+            OverallSkill = (StandardPass +                      // Every time object is created average of all skills is calculated
                             SpinPass +
                             PopPass +
                             FrontTackle +
@@ -56,24 +56,9 @@ namespace RugbyManagementSystem.Database.Models
                             GrubberKick +
                             GoalKick) / 11;
 
-            //FindTeamName();
         }
 
-        public void UpdateOverallSkill()
-        {
-            OverallSkill = (StandardPass +
-                            SpinPass +
-                            PopPass +
-                            FrontTackle +
-                            RearTackle +
-                            SideTackle +
-                            ScrabbleTackle +
-                            DropKick +
-                            PuntKick +
-                            GrubberKick +
-                            GoalKick) / 11;
-        }
-        public void FindTeamName()
+        public void FindTeamName()                        // When invoked helps to find name of the team that player belongs to
         {
             foreach(TeamModel x in DataContainer.Teams)
             {
